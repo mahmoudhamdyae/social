@@ -2,18 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1059735946958-1sssmhqh0fh3jt9orkjpks1hstcuj8b2.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCBEdKwIuoUNl7ErxS7nBl0i0keZ5d3XE8</string>
+	<string>AIzaSyCF5SjhjUxbT0j2lFvN9z_mSwVtr2YpVn4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>579215239805</string>
+	<string>1059735946958</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.mahmoudhamdyae.social</string>
 	<key>PROJECT_ID</key>
-	<string>social-a2e44</string>
+	<string>smart-learning-2c505</string>
 	<key>STORAGE_BUCKET</key>
-	<string>social-a2e44.firebasestorage.app</string>
+	<string>smart-learning-2c505.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +27,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:579215239805:ios:4317e8d21323e54b945f14</string>
+	<string>1:1059735946958:ios:5f5c5055347276fad8329f</string>
+	<key>DATABASE_URL</key>
+	<string>https://smart-learning-2c505.firebaseio.com</string>
 </dict>
 </plist>

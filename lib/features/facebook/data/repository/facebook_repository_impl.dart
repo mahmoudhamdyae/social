@@ -11,13 +11,13 @@ import '../data_source/facebook_remote_data_source.dart';
 
 class FacebookRepositoryImpl implements FacebookRepository {
 
-  final FacebookRemoteDataSource remoteDataSource;
-  FacebookRepositoryImpl(this.remoteDataSource);
+  final FacebookRemoteDataSource _remoteDataSource;
+  FacebookRepositoryImpl(this._remoteDataSource);
 
   @override
   Future<Either<Failure, List<Post>>> getPosts() async {
     try {
-      final result = await remoteDataSource.getPosts();
+      final result = await _remoteDataSource.getPosts();
       return Right(result);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessage));
@@ -27,7 +27,7 @@ class FacebookRepositoryImpl implements FacebookRepository {
   @override
   Future<Either<Failure, List<Comment>>> getComments(int postId) async {
     try {
-      final result = await remoteDataSource.getComments(postId);
+      final result = await _remoteDataSource.getComments(postId);
       return Right(result);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessage));
@@ -37,7 +37,7 @@ class FacebookRepositoryImpl implements FacebookRepository {
   @override
   Future<Either<Failure, void>> addComment(String comment, int postId) async {
     try {
-      await remoteDataSource.addComment(comment, postId);
+      await _remoteDataSource.addComment(comment, postId);
       return const Right(null);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessage));
@@ -47,7 +47,7 @@ class FacebookRepositoryImpl implements FacebookRepository {
   @override
   Future<Either<Failure, void>> likePost(int postId) async {
     try {
-      await remoteDataSource.likePost(postId);
+      await _remoteDataSource.likePost(postId);
       return const Right(null);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessage));
@@ -57,7 +57,7 @@ class FacebookRepositoryImpl implements FacebookRepository {
   @override
   Future<Either<Failure, void>> dislikePost(int postId) async {
     try {
-      await remoteDataSource.dislikePost(postId);
+      await _remoteDataSource.dislikePost(postId);
       return const Right(null);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessage));

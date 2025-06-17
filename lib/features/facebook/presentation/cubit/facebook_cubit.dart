@@ -32,7 +32,7 @@ class FacebookCubit extends Cubit<FacebookStates> {
     return super.close();
   }
 
-  static getInstance() => FacebookCubit._(
+  static FacebookCubit getInstance() => FacebookCubit._(
     instance.get<GetPostsUseCase>(),
     instance.get<GetCommentsUseCase>(),
     instance.get<AddCommentUseCase>(),

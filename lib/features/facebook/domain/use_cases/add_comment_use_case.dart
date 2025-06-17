@@ -5,10 +5,10 @@ import '../../../../core/error/failure.dart';
 
 class AddCommentUseCase {
 
-  final FacebookRepository repository;
-  AddCommentUseCase(this.repository);
+  final FacebookRepository _repository;
+  AddCommentUseCase(this._repository);
 
   Future<Either<Failure, void>> call(String comment, int postId) async {
-    return repository.addComment(comment, postId);
+    return _repository.addComment(comment, postId);
   }
 }

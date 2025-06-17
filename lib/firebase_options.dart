@@ -50,19 +50,23 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDFGMJGEWCJLfp1yzSYMXfp02QWBxAKxHY',
-    appId: '1:579215239805:android:6eedf53098f48d19945f14',
-    messagingSenderId: '579215239805',
-    projectId: 'social-a2e44',
-    storageBucket: 'social-a2e44.firebasestorage.app',
+    apiKey: 'AIzaSyDVlcGWMM-O4-mQ0QzoghQZb5jdBGTFesE',
+    appId: '1:1059735946958:android:810b6e5e260b0c92d8329f',
+    messagingSenderId: '1059735946958',
+    projectId: 'smart-learning-2c505',
+    databaseURL: 'https://smart-learning-2c505.firebaseio.com',
+    storageBucket: 'smart-learning-2c505.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCBEdKwIuoUNl7ErxS7nBl0i0keZ5d3XE8',
-    appId: '1:579215239805:ios:4317e8d21323e54b945f14',
-    messagingSenderId: '579215239805',
-    projectId: 'social-a2e44',
-    storageBucket: 'social-a2e44.firebasestorage.app',
+    apiKey: 'AIzaSyCF5SjhjUxbT0j2lFvN9z_mSwVtr2YpVn4',
+    appId: '1:1059735946958:ios:5f5c5055347276fad8329f',
+    messagingSenderId: '1059735946958',
+    projectId: 'smart-learning-2c505',
+    databaseURL: 'https://smart-learning-2c505.firebaseio.com',
+    storageBucket: 'smart-learning-2c505.appspot.com',
+    androidClientId: '1059735946958-1sssmhqh0fh3jt9orkjpks1hstcuj8b2.apps.googleusercontent.com',
     iosBundleId: 'com.mahmoudhamdyae.social',
   );
+
 }

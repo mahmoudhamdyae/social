@@ -6,10 +6,10 @@ import '../../../../core/error/failure.dart';
 
 class GetPostsUseCase {
 
-  final FacebookRepository repository;
-  GetPostsUseCase(this.repository);
+  final FacebookRepository _repository;
+  GetPostsUseCase(this._repository);
 
   Future<Either<Failure, List<Post>>> call() async {
-    return repository.getPosts();
+    return _repository.getPosts();
   }
 }

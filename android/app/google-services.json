@@ -1,26 +1,119 @@
 {
   "project_info": {
-    "project_number": "579215239805",
-    "project_id": "social-a2e44",
-    "storage_bucket": "social-a2e44.firebasestorage.app"
+    "project_number": "1059735946958",
+    "firebase_url": "https://smart-learning-2c505.firebaseio.com",
+    "project_id": "smart-learning-2c505",
+    "storage_bucket": "smart-learning-2c505.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:579215239805:android:6eedf53098f48d19945f14",
+        "mobilesdk_app_id": "1:1059735946958:android:6669a8b1410c8fced8329f",
         "android_client_info": {
-          "package_name": "com.mahmoudhamdyae.social"
+          "package_name": "com.mahmoudhamdyae.smartlearning1"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1059735946958-1sssmhqh0fh3jt9orkjpks1hstcuj8b2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mahmoudhamdyae.smartlearning1",
+            "certificate_hash": "ad7fcdf1ecb88ff72398b8cdce2b3983f8401f12"
+          }
+        },
+        {
+          "client_id": "1059735946958-s3ur2gojviav9bta9l9p9v0k5okhhdjl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDFGMJGEWCJLfp1yzSYMXfp02QWBxAKxHY"
+          "current_key": "AIzaSyDVlcGWMM-O4-mQ0QzoghQZb5jdBGTFesE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059735946958-s3ur2gojviav9bta9l9p9v0k5okhhdjl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059735946958:android:810b6e5e260b0c92d8329f",
+        "android_client_info": {
+          "package_name": "com.mahmoudhamdyae.social"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059735946958-s3ur2gojviav9bta9l9p9v0k5okhhdjl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVlcGWMM-O4-mQ0QzoghQZb5jdBGTFesE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059735946958-s3ur2gojviav9bta9l9p9v0k5okhhdjl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059735946958:android:e2de45263934a12b",
+        "android_client_info": {
+          "package_name": "com.project.csed.smartlearning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059735946958-97q9j98s8i014sbdhcpbn9bm6rfk2q7o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.csed.smartlearning",
+            "certificate_hash": "a668971221ea68564fb1f368a181f7e0299bbd9e"
+          }
+        },
+        {
+          "client_id": "1059735946958-n301p743564tdshg5g43rdj43hkej0op.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.csed.smartlearning",
+            "certificate_hash": "a8745547346ec820aee967efb215db782b801536"
+          }
+        },
+        {
+          "client_id": "1059735946958-s3ur2gojviav9bta9l9p9v0k5okhhdjl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVlcGWMM-O4-mQ0QzoghQZb5jdBGTFesE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059735946958-s3ur2gojviav9bta9l9p9v0k5okhhdjl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

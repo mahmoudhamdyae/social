@@ -5,10 +5,10 @@ import '../../../../core/error/failure.dart';
 
 class DislikePostUseCase {
 
-  final FacebookRepository repository;
-  DislikePostUseCase(this.repository);
+  final FacebookRepository _repository;
+  DislikePostUseCase(this._repository);
 
   Future<Either<Failure, void>> call(int postId) async {
-    return repository.dislikePost(postId);
+    return _repository.dislikePost(postId);
   }
 }

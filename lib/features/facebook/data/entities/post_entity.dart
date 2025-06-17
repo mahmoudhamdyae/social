@@ -1,4 +1,4 @@
-import 'package:social/features/facebook/data/entities/comment_entity.dart';
+
 import 'package:social/features/facebook/domain/models/post.dart';
 
 class PostEntity extends Post {
