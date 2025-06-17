@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social/core/extensions/num_extensions.dart';
 import 'package:social/features/facebook/presentation/cubit/facebook_cubit.dart';
+
+import '../../../../core/components/screens/loading_screen.dart';
+import '../cubit/facebook_states.dart';
 
 class AddCommentSection extends StatefulWidget {
 
@@ -25,25 +29,37 @@ class _AddCommentSectionState extends State<AddCommentSection> {
                 child: TextFormField(
                   decoration: InputDecoration(
                     hintText: 'Write a comment...',
-                    border: OutlineInputBorder(),
                   ),
                   controller: BlocProvider.of<FacebookCubit>(context).addCommentController,
                 )
             )
         ),
-        InkWell(
-          onTap: () {
-            _sendComment();
+        16.pw,
+        BlocBuilder<FacebookCubit, FacebookStates>(
+          buildWhen: (previous, current) =>
+          current is LoadingAddCommentState ||
+              current is ErrorAddCommentState ||
+              current is SuccessAddCommentState,
+          builder: (BuildContext context, FacebookStates state) {
+            return state is LoadingAddCommentState ? LoadingScreen()
+                :
+            InkWell(
+              onTap: () {
+                _sendComment();
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).colorScheme.primary
+                ),
+                child: Icon(
+                    Icons.send,
+                  color: Colors.white,
+                ),
+              ),
+            );
           },
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Theme.of(context).colorScheme.primary
-            ),
-            child: Icon(
-              Icons.send
-            ),
-          ),
         ),
       ],
     );
@@ -53,7 +69,7 @@ class _AddCommentSectionState extends State<AddCommentSection> {
     var formData = formState.currentState;
     if (formData!.validate()) {
       formData.save();
-      BlocProvider.of<FacebookCubit>(context).addComment();
+      BlocProvider.of<FacebookCubit>(context).addComment(widget.postId);
     }
   }
 }

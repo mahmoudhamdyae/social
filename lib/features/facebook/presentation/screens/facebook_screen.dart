@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social/core/components/screens/error_screen.dart';
 import 'package:social/core/components/screens/loading_screen.dart';
 import 'package:social/features/facebook/presentation/components/posts_list.dart';
 import 'package:social/features/facebook/presentation/cubit/facebook_cubit.dart';
@@ -19,6 +20,8 @@ class FacebookScreen extends StatelessWidget {
               current is SuccessGetPostsState,
           builder: (BuildContext context, FacebookStates state) {
             return state is LoadingGetPostsState ? LoadingScreen()
+            :
+                state is ErrorGetPostsState ? ErrorScreen(errorMessage: state.errorMessage ?? '')
             :
             state is SuccessGetPostsState ?
                 PostsList(posts: state.posts)

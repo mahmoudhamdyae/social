@@ -1,5 +1,5 @@
 class Comment {
-  int? id;
+  String? id;
   String? userName;
   String? userImage;
   String? comment;

@@ -1,3 +1,5 @@
+import 'package:social/features/facebook/domain/models/comment.dart';
+
 import '../../domain/models/post.dart';
 
 abstract class FacebookStates {
@@ -15,6 +17,19 @@ class ErrorGetPostsState extends FacebookStates {
 class SuccessGetPostsState extends FacebookStates {
   final List<Post> posts;
   const SuccessGetPostsState(this.posts);
+}
+
+/// Get Posts States
+class LoadingGetCommentsState extends FacebookStates {
+  const LoadingGetCommentsState();
+}
+class ErrorGetCommentsState extends FacebookStates {
+  final String? errorMessage;
+  const ErrorGetCommentsState(this.errorMessage);
+}
+class SuccessGetCommentsState extends FacebookStates {
+  final List<Comment> comments;
+  const SuccessGetCommentsState(this.comments);
 }
 
 /// Add Comment States

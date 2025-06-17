@@ -54,6 +54,7 @@ class PostItem extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                     onPressed: () {
+                      BlocProvider.of<FacebookCubit>(context).getComments(post.id ?? -1);
                       showModalBottomSheet(
                           context: context,
                           useRootNavigator: true,
@@ -61,7 +62,6 @@ class PostItem extends StatelessWidget {
                               BlocProvider.value(
                                 value: BlocProvider.of<FacebookCubit>(context),
                                 child: CommentsSheet(
-                                  comments: post.comments ?? [],
                                   postId: post.id ?? -1,
                                 ),
                               )

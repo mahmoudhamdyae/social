@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:social/features/facebook/data/entities/comment_entity.dart';
 import 'package:social/features/facebook/data/entities/post_entity.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../core/error/exceptions.dart';
 
 abstract class FacebookRemoteDataSource {
 
   Future<List<PostEntity>> getPosts();
-  Future<void> addComment(String comment);
+  Future<List<CommentEntity>> getComments(int postId);
+  Future<void> addComment(String comment, int postId);
   Future<void> likePost(int postId);
   Future<void> dislikePost(int postId);
 
@@ -38,37 +41,33 @@ class FacebookRemoteDataSourceImpl extends FacebookRemoteDataSource {
     return posts;
   }
 
-  Future addNote(String? title, String? description, String? imageUrl) async {
-    return await postsRef.add({
-      "title": title,
-      "note": description,
-      "imageUrl": imageUrl,
-    });
-  }
-
-  Future<void> delNote(String noteId) async {
-    return postsRef.doc(noteId).delete();
-  }
-
-  Future updateNote(String noteId, String? title, String? description, String? imageUrl) async {
-    if (imageUrl == null) {
-      return await postsRef.doc(noteId).update({
-        "title": title,
-        "note": description,
+  @override
+  Future<List<CommentEntity>> getComments(int postId) async {
+    List<CommentEntity> comments = [];
+    try {
+      await postsRef
+          .doc('$postId')
+          .collection('comments')
+          .orderBy('timestamp', descending: true)
+          .get().then((event) {
+        for (var doc in event.docs) {
+          comments.add(CommentEntity.fromJson(doc.data()));
+        }
       });
-    } else {
-      return await postsRef.doc(noteId).update({
-        "title": title,
-        "note": description,
-        "imageUrl": imageUrl,
-      });
+    } on Exception catch (error) {
+      throw ServerException(errorMessage: error.toString());
     }
+    return comments;
   }
 
   @override
-  Future<void> addComment(String comment) async {
-    // TODO: implement addComment
-    throw UnimplementedError();
+  Future<void> addComment(String comment, int postId) async {
+    await postsRef.doc('$postId').collection('comments').add(CommentEntity(
+      id: Uuid().v4(),
+      userName: 'Anonymous',
+      userImage: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      comment: comment,
+    ).toJson());
   }
 
   @override

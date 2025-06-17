@@ -11,19 +11,17 @@ class PostEntity extends Post {
     super.likesNo,
     super.userName,
     super.userImage,
-    super.comments
   });
 
   factory PostEntity.fromJson(dynamic json) {
     return PostEntity(
-        id: json['id'],
-        post: json['post'],
-        images: List<String>.from(json['images'] ?? []),
-        video: json['video'],
-        likesNo: json['likes_no'],
-        userName: json['user_name'],
-        userImage: json['user_image'],
-        comments: List.from(json['comments'] ?? []).map((e) => CommentEntity.fromJson(e)).toList(),
+      id: json['id'],
+      post: json['post'],
+      images: List<String>.from(json['images'] ?? []),
+      video: json['video'],
+      likesNo: json['likes_no'],
+      userName: json['user_name'],
+      userImage: json['user_image'],
     );
   }
 }

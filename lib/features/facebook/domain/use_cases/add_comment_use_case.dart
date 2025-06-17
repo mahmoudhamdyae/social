@@ -8,7 +8,7 @@ class AddCommentUseCase {
   final FacebookRepository repository;
   AddCommentUseCase(this.repository);
 
-  Future<Either<Failure, void>> call(String comment) async {
-    return repository.addComment(comment);
+  Future<Either<Failure, void>> call(String comment, int postId) async {
+    return repository.addComment(comment, postId);
   }
 }

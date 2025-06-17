@@ -8,7 +8,6 @@ class Post {
   int? likesNo;
   String? userName;
   String? userImage;
-  List<Comment>? comments;
 
   Post({
     this.id,
@@ -18,6 +17,5 @@ class Post {
     this.likesNo,
     this.userName,
     this.userImage,
-    this.comments,
   });
 }
