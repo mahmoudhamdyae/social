@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:social/core/extensions/num_extensions.dart';
-import 'package:social/features/facebook/presentaion/screens/facebook_screen.dart';
-import 'package:social/features/instagram/presentaion/screens/instagram_screen.dart';
-import 'package:social/features/tiktok/presentaion/screens/tiktok_screen.dart';
+import 'package:social/features/facebook/presentation/screens/facebook_screen.dart';
+import 'package:social/features/instagram/presentation/screens/instagram_screen.dart';
+import 'package:social/features/tiktok/presentation/screens/tiktok_screen.dart';
 
 import '../core/resources/assets_manager.dart';
 
