@@ -27,9 +27,9 @@ class MainScreenState extends State<MainScreen> {
     return PersistentTabView(
       controller: _controller,
       tabs: [
-        _buildTikTok(context),
-        _buildInstagram(context),
         _buildFacebook(context),
+        _buildInstagram(context),
+        _buildTikTok(context),
       ],
       navBarBuilder: (navBarConfig) => Style1BottomNavBar(
         navBarConfig: navBarConfig,
@@ -46,12 +46,12 @@ class MainScreenState extends State<MainScreen> {
     );
   }
 
-  PersistentTabConfig _buildTikTok(BuildContext context) {
+  PersistentTabConfig _buildFacebook(BuildContext context) {
     return PersistentTabConfig(
-      screen: const TiktokScreen(),
+      screen: const FacebookScreen(),
       item: ItemConfig(
-        icon: _getActiveWidget(AssetsManager.tiktok, 'TikTok'),
-        inactiveIcon: _getInActiveWidget(AssetsManager.tiktok, 'TikTok'),
+        icon: _getActiveWidget(AssetsManager.facebook, 'Facebook'),
+        inactiveIcon: _getInActiveWidget(AssetsManager.facebook, 'Facebook'),
       ),
     );
   }
@@ -66,12 +66,12 @@ class MainScreenState extends State<MainScreen> {
     );
   }
 
-  PersistentTabConfig _buildFacebook(BuildContext context) {
+  PersistentTabConfig _buildTikTok(BuildContext context) {
     return PersistentTabConfig(
-      screen: const FacebookScreen(),
+      screen: const TiktokScreen(),
       item: ItemConfig(
-        icon: _getActiveWidget(AssetsManager.facebook, 'Facebook'),
-        inactiveIcon: _getInActiveWidget(AssetsManager.facebook, 'Facebook'),
+        icon: _getActiveWidget(AssetsManager.tiktok, 'TikTok'),
+        inactiveIcon: _getInActiveWidget(AssetsManager.tiktok, 'TikTok'),
       ),
     );
   }
