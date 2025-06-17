@@ -42,6 +42,10 @@ class FacebookCubit extends Cubit<FacebookStates> {
 
   void getPosts() {
     emit(LoadingGetPostsState());
+    _getPosts();
+  }
+
+  void _getPosts() {
     _getPostsUseCase.call().then((response) {
       response.fold((error) {
         emit(ErrorGetPostsState(error.message));
@@ -81,6 +85,7 @@ class FacebookCubit extends Cubit<FacebookStates> {
         emit(SuccessAddCommentState());
         addCommentController.clear();
         _getComments(postId);
+        _getPosts();
       });
     });
   }
@@ -92,6 +97,7 @@ class FacebookCubit extends Cubit<FacebookStates> {
         emit(ErrorLikePostState(error.message));
       }, (_) {
         emit(SuccessLikePostState());
+        _getPosts();
       });
     });
   }
@@ -103,6 +109,7 @@ class FacebookCubit extends Cubit<FacebookStates> {
         emit(ErrorDislikePostState(error.message));
       }, (_) {
         emit(SuccessDislikePostState());
+        _getPosts();
       });
     });
   }

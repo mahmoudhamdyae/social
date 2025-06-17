@@ -41,8 +41,43 @@ class PostItem extends StatelessWidget {
             ),
             textAlign: TextAlign.start,
           ),
+          (post.images != null && post.images!.isNotEmpty ? 8 : 0).ph,
           post.images != null && post.images!.isNotEmpty ?
           PostImages(images: post.images!) : const SizedBox(),
+          8.ph,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // No of Likes
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      shape: BoxShape.circle
+                    ),
+                    child: Icon(
+                      Icons.thumb_up_alt_outlined,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      size: 16,
+                    ),
+                  ),
+                  8.pw,
+                  Text(
+                    '${post.likesNo}'
+                  )
+                ],
+              ),
+              // No of Comments
+              InkWell(
+                onTap: () { _onClickComments(context); },
+                child: Text(
+                  '${post.commentNo ?? 0} comments'
+                ),
+              )
+            ],
+          ),
           16.ph,
           // Actions
           Row(
@@ -56,19 +91,7 @@ class PostItem extends StatelessWidget {
               Expanded(
                 child: InkWell(
                     onTap: () {
-                      BlocProvider.of<FacebookCubit>(context).getComments(post.id ?? -1);
-                      showModalBottomSheet(
-                          context: context,
-                          useRootNavigator: true,
-                          isScrollControlled: true,
-                          builder: (BuildContext builderContext) =>
-                              BlocProvider.value(
-                                value: BlocProvider.of<FacebookCubit>(context),
-                                child: CommentsSheet(
-                                  postId: post.id ?? -1,
-                                ),
-                              )
-                      );
+                      _onClickComments(context);
                     },
                     child: Row(
                       children: [
@@ -78,7 +101,7 @@ class PostItem extends StatelessWidget {
                         ),
                         16.pw,
                         Text(
-                          'Comments',
+                          'Comment',
                           style: TextStyle(
                             color: Colors.black87,
                           ),
@@ -91,6 +114,22 @@ class PostItem extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  void _onClickComments(BuildContext context) {
+    BlocProvider.of<FacebookCubit>(context).getComments(post.id ?? -1);
+    showModalBottomSheet(
+        context: context,
+        useRootNavigator: true,
+        isScrollControlled: true,
+        builder: (BuildContext builderContext) =>
+            BlocProvider.value(
+              value: BlocProvider.of<FacebookCubit>(context),
+              child: CommentsSheet(
+                postId: post.id ?? -1,
+              ),
+            )
     );
   }
 }

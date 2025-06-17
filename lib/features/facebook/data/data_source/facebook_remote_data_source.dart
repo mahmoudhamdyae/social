@@ -69,6 +69,7 @@ class FacebookRemoteDataSourceImpl extends FacebookRemoteDataSource {
         userImage: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         comment: comment,
       ).toJson());
+      await postsRef.doc('$postId').update({'comment_no' : FieldValue.increment(1)});
     } on Exception catch (error) {
       throw ServerException(errorMessage: error.toString());
     }
@@ -76,13 +77,19 @@ class FacebookRemoteDataSourceImpl extends FacebookRemoteDataSource {
 
   @override
   Future<void> likePost(int postId) async {
-    // TODO: implement likePost
-    throw UnimplementedError();
+   try {
+     await postsRef.doc('$postId').update({'likes_no' : FieldValue.increment(1)});
+   } on Exception catch (error) {
+     throw ServerException(errorMessage: error.toString());
+   }
   }
 
   @override
   Future<void> dislikePost(int postId) async {
-    // TODO: implement dislikePost
-    throw UnimplementedError();
+    try {
+      await postsRef.doc('$postId').update({'likes_no' : FieldValue.increment(-1)});
+    } on Exception catch (error) {
+      throw ServerException(errorMessage: error.toString());
+    }
   }
 }

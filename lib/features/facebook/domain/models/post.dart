@@ -6,6 +6,7 @@ class Post {
   List<String>? images;
   String? video;
   int? likesNo;
+  int? commentNo;
   String? userName;
   String? userImage;
 
@@ -15,6 +16,7 @@ class Post {
     this.images,
     this.video,
     this.likesNo,
+    this.commentNo,
     this.userName,
     this.userImage,
   });

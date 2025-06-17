@@ -9,6 +9,7 @@ class PostEntity extends Post {
     super.images,
     super.video,
     super.likesNo,
+    super.commentNo,
     super.userName,
     super.userImage,
   });
@@ -20,6 +21,7 @@ class PostEntity extends Post {
       images: List<String>.from(json['images'] ?? []),
       video: json['video'],
       likesNo: json['likes_no'],
+      commentNo: json['comment_no'],
       userName: json['user_name'],
       userImage: json['user_image'],
     );

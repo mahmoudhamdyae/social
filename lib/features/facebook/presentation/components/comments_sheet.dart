@@ -46,7 +46,7 @@ class CommentsSheet extends StatelessWidget {
                 ),
                 16.ph,
                 AddCommentSection(postId: postId),
-                (MediaQuery.paddingOf(context).bottom).ph,
+                (MediaQuery.paddingOf(context).bottom + 16).ph,
               ],
             ),
           ),
