@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social/core/di/di.dart';
 import 'package:social/features/facebook/domain/use_cases/add_comment_use_case.dart';
@@ -20,6 +21,8 @@ class FacebookCubit extends Cubit<FacebookStates> {
       this._dislikePostUseCase
       ) : super(LoadingGetPostsState());
 
+  final TextEditingController addCommentController = TextEditingController();
+
   static getInstance() => FacebookCubit._(
     instance.get<GetPostsUseCase>(),
     instance.get<AddCommentUseCase>(),
@@ -38,9 +41,9 @@ class FacebookCubit extends Cubit<FacebookStates> {
     });
   }
 
-  void addComment(String comment) {
+  void addComment() {
     emit(LoadingAddCommentState());
-    _addCommentUseCase.call(comment).then((response) {
+    _addCommentUseCase.call(addCommentController.text).then((response) {
       response.fold((error) {
         emit(ErrorAddCommentState(error.message));
       }, (_) {

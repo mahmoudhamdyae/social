@@ -3,7 +3,7 @@ import 'comment.dart';
 class Post {
   int? id;
   String? post;
-  List<String?>? images;
+  List<String>? images;
   String? video;
   int? likesNo;
   String? userName;

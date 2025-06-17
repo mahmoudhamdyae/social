@@ -66,20 +66,20 @@ class FacebookRemoteDataSourceImpl extends FacebookRemoteDataSource {
   }
 
   @override
-  Future<void> addComment(String comment) {
+  Future<void> addComment(String comment) async {
     // TODO: implement addComment
     throw UnimplementedError();
   }
 
   @override
-  Future<void> dislikePost(int postId) {
-    // TODO: implement dislikePost
+  Future<void> likePost(int postId) async {
+    // TODO: implement likePost
     throw UnimplementedError();
   }
 
   @override
-  Future<void> likePost(int postId) {
-    // TODO: implement likePost
+  Future<void> dislikePost(int postId) async {
+    // TODO: implement dislikePost
     throw UnimplementedError();
   }
 }

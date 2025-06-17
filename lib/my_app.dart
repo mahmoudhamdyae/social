@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:social/features/main_screen.dart';
 
+import 'core/resources/theme_manager.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -9,10 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Social App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
+      theme: getApplicationTheme(context),
       debugShowCheckedModeBanner: false,
       home: const MainScreen(),
     );

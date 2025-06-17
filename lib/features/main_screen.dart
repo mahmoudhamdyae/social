@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:social/core/components/custom_shadow.dart';
 import 'package:social/core/extensions/num_extensions.dart';
 import 'package:social/features/facebook/presentation/screens/facebook_screen.dart';
 import 'package:social/features/instagram/presentation/screens/instagram_screen.dart';
@@ -39,6 +40,7 @@ class MainScreenState extends State<MainScreen> {
               topLeft: Radius.circular(16),
               topRight: Radius.circular(16),
             ),
+          boxShadow: navBarShadow(context: context)
         ),
       ),
     );
@@ -78,6 +80,7 @@ class MainScreenState extends State<MainScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        8.ph,
         Image.asset(
           image,
           height: 24,
@@ -98,6 +101,7 @@ class MainScreenState extends State<MainScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        8.ph,
         Image.asset(
           image,
           height: 24,
@@ -124,7 +128,7 @@ class MainScreenState extends State<MainScreen> {
 
   TextStyle _getActiveTextStyle() {
     return TextStyle(
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w600,
       fontSize: 16,
       color: Theme.of(context).colorScheme.secondary,
     );

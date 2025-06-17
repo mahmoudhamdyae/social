@@ -12,8 +12,8 @@ class CommentEntity extends Comment {
   factory CommentEntity.fromJson(Map<String, dynamic> json) {
     return CommentEntity(
       id: json['id'],
-      userName: json['userName'],
-      userImage: json['userImage'],
+      userName: json['user_name'],
+      userImage: json['user_image'],
       comment: json['comment'],
     );
   }
