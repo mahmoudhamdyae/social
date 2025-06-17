@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:social/core/extensions/num_extensions.dart';
 
+import '../../../../core/components/cached_image.dart';
+
 class PostImages extends StatelessWidget {
   final List<String> images;
   const PostImages({super.key, required this.images});
@@ -86,15 +88,15 @@ class PostImages extends StatelessWidget {
   Widget _buildSingleImage(String url) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
-      child: Image.network(url, fit: BoxFit.cover),
+      child: CachedImage(imageUrl: url, fit: BoxFit.cover),
     );
   }
 
   Widget _buildImage(String url) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(4),
-      child: Image.network(
-        url,
+      child: CachedImage(
+        imageUrl: url,
         fit: BoxFit.cover,
         width: double.infinity,
         height: double.infinity,

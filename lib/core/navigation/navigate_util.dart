@@ -17,6 +17,6 @@ class NavigateUtil {
 
   static void navigateUp(BuildContext context) {
     debugPrint('Navigating up');
-    NavigateUtil.navigateUp(context);
+    Navigator.pop(context);
   }
 }

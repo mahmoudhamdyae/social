@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:social/core/extensions/num_extensions.dart';
 
+import '../../../../core/components/cached_image.dart';
+
 class UserSection extends StatelessWidget {
 
   final String userName;
@@ -21,8 +23,8 @@ class UserSection extends StatelessWidget {
           width: 40,
           height: 40,
           child: ClipOval(
-            child: Image.network(
-              userImage,
+            child: CachedImage(
+              imageUrl: userImage,
               fit: BoxFit.cover,
             ),
           ),
