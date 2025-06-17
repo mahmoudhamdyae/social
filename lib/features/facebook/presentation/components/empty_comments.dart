@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:social/core/extensions/num_extensions.dart';
-import 'package:social/core/resources/assets_manager.dart';
 
 class EmptyComments extends StatelessWidget {
   const EmptyComments({super.key});
@@ -11,16 +9,21 @@ class EmptyComments extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.asset(
-          AssetsManager.empty,
-          width: MediaQuery.sizeOf(context).width / 2,
-        ),
-        32.ph,
         Text(
-          'No comments on this post yet',
+          'No comments yet',
           style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w400
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.black
+          ),
+        ),
+        8.ph,
+        Text(
+          'Be the first to comment.',
+          style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: Colors.black54
           ),
         )
       ],

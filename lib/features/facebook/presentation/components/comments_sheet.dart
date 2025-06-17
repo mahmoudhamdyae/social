@@ -38,6 +38,7 @@ class CommentsSheet extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             child: Column(
               children: [
+                (MediaQuery.paddingOf(context).top + 24).ph,
                 Expanded(
                     child: state.comments.isEmpty ? EmptyComments()
                         :

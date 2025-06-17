@@ -30,7 +30,11 @@ class UserSection extends StatelessWidget {
         16.pw,
         // User Name
         Text(
-            userName
+          userName,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+          ),
         ),
       ],
     );

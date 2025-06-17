@@ -12,7 +12,7 @@ class CommentsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: comments.length,
-      separatorBuilder: (BuildContext context, int index) => 16.ph,
+      separatorBuilder: (BuildContext context, int index) => 24.ph,
       itemBuilder: (BuildContext context, int index) {
         return CommentItem(comment: comments[index]);
       },
