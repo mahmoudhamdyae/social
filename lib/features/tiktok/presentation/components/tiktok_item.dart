@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class TiktokItem extends StatefulWidget {
-  const TiktokItem({super.key});
+
+  final String link;
+  const TiktokItem({super.key, required this.link});
 
   @override
   State<TiktokItem> createState() => _TiktokItemState();
@@ -14,8 +16,7 @@ class _TiktokItemState extends State<TiktokItem> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))
+    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.link))
       ..initialize().then((_) {
         setState(() {});
       });

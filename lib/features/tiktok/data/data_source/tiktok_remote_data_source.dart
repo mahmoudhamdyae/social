@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:social/features/tiktok/data/entities/video_entity.dart';
 
 abstract class TiktokRemoteDataSource {
-  Future<List<VideoEntity>> getVideoList();
+  Future<List<VideoEntity>> getVideos();
 
   final FirebaseFirestore db;
   TiktokRemoteDataSource(this.db);
@@ -17,7 +17,7 @@ class TiktokRemoteDataSourceImpl extends TiktokRemoteDataSource {
   }
   
   @override
-  Future<List<VideoEntity>> getVideoList() async {
+  Future<List<VideoEntity>> getVideos() async {
     List<VideoEntity> videos = [];
     await tiktokRef.get().then((event) {
       for (var doc in event.docs) {
