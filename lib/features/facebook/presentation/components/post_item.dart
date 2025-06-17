@@ -4,6 +4,7 @@ import 'package:social/core/components/custom_shadow.dart';
 import 'package:social/core/extensions/num_extensions.dart';
 import 'package:social/features/facebook/domain/models/post.dart';
 import 'package:social/features/facebook/presentation/components/comments_sheet.dart';
+import 'package:social/features/facebook/presentation/components/post_images.dart';
 import 'package:social/features/facebook/presentation/components/user_section.dart';
 import 'package:social/features/facebook/presentation/cubit/facebook_cubit.dart';
 
@@ -40,8 +41,8 @@ class PostItem extends StatelessWidget {
             ),
             textAlign: TextAlign.start,
           ),
-          // post.images != null && post.images!.isNotEmpty ?
-          // PostImages(images: post.images!) : const SizedBox(),
+          post.images != null && post.images!.isNotEmpty ?
+          PostImages(images: post.images!) : const SizedBox(),
           16.ph,
           // Actions
           Row(

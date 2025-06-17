@@ -25,16 +25,33 @@ class _TiktokItemState extends State<TiktokItem> {
   @override
   Widget build(BuildContext context) {
     return _controller.value.isInitialized
-        ? GestureDetector(
-          onTap: () {
-            _controller.value.isPlaying
-                ? _controller.pause()
-                : _controller.play();
-          },
-          child: AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: VideoPlayer(_controller),
+        ? Stack(
+          children: [
+            GestureDetector(
+              onTap: () {
+                _controller.value.isPlaying
+                    ? _controller.pause()
+                    : _controller.play();
+              },
+              child: AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
+                  ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey
+                ),
+                padding: const EdgeInsets.all(8),
+                child: Icon(
+                  _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                ),
               ),
+            )
+          ],
         )
         : Container();
   }

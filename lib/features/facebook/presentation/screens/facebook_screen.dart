@@ -15,44 +15,46 @@ class FacebookScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        (MediaQuery.paddingOf(context).top).ph,
-        SizedBox(
-          height: 200,
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(child: (MediaQuery.paddingOf(context).top).ph),
+        SliverToBoxAdapter(
           child: BlocProvider<StoriesCubit>(
-            create: (BuildContext context) => StoriesCubit.getInstance()..getStories(),
+            create: (_) => StoriesCubit.getInstance()..getStories(),
             child: BlocBuilder<StoriesCubit, StoriesState>(
-              buildWhen: (previous, current) =>
-                  current is LoadingGetStoriesState ||
-                  current is ErrorGetStoriesState ||
-                  current is SuccessGetStoriesState,
-              builder: (BuildContext context, StoriesState state) {
-                return state is SuccessGetStoriesState ? StoryList(stories: state.stories)
-                :
-                    const SizedBox();
+              buildWhen: (prev, curr) =>
+                  curr is LoadingGetStoriesState ||
+                  curr is ErrorGetStoriesState ||
+                  curr is SuccessGetStoriesState,
+              builder: (context, state) {
+                return SizedBox(
+                  height: 200,
+                  child: state is SuccessGetStoriesState
+                      ? StoryList(stories: state.stories)
+                      : const SizedBox(),
+                );
               },
             ),
           ),
         ),
-        Expanded(
-          child: BlocProvider<FacebookCubit>(
-              create: (BuildContext context) => FacebookCubit.getInstance()..getPosts(),
-              child: BlocBuilder<FacebookCubit, FacebookStates>(
-                buildWhen: (previous, current) =>
-                    current is LoadingGetPostsState ||
-                    current is ErrorGetPostsState ||
-                    current is SuccessGetPostsState,
-                builder: (BuildContext context, FacebookStates state) {
-                  return state is LoadingGetPostsState ? LoadingScreen()
-                  :
-                      state is ErrorGetPostsState ? ErrorScreen(errorMessage: state.errorMessage ?? '')
-                  :
-                  state is SuccessGetPostsState ?
-                      PostsList(posts: state.posts)
-                  : const SizedBox();
-                },
-              )
+        BlocProvider<FacebookCubit>(
+          create: (_) => FacebookCubit.getInstance()..getPosts(),
+          child: BlocBuilder<FacebookCubit, FacebookStates>(
+            buildWhen: (prev, curr) =>
+                curr is LoadingGetPostsState ||
+                curr is ErrorGetPostsState ||
+                curr is SuccessGetPostsState,
+            builder: (context, state) {
+              return state is LoadingGetPostsState
+                  ? SliverToBoxAdapter(child: LoadingScreen())
+                  : state is ErrorGetPostsState
+                      ? SliverToBoxAdapter(
+                          child: ErrorScreen(
+                              errorMessage: state.errorMessage ?? ''))
+                      : state is SuccessGetPostsState
+                          ? PostsList(posts: state.posts)
+                          : const SliverToBoxAdapter(child: SizedBox());
+            },
           ),
         ),
       ],
