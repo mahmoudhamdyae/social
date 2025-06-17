@@ -7,8 +7,8 @@ class VideoEntity extends Video {
 
   VideoEntity({
     super.id,
-    super.user,
-    super.userPic,
+    super.userName,
+    super.userImage,
     super.videoTitle,
     super.songName,
     super.likes,
@@ -19,8 +19,8 @@ class VideoEntity extends Video {
   factory VideoEntity.fromJson(dynamic json) {
     return VideoEntity(
       id: json['id'],
-      user: json['user'],
-      userPic: json['user_pic'],
+      userName: json['user'],
+      userImage: json['user_pic'],
       videoTitle: json['video_title'],
       songName: json['song_name'],
       likes: json['likes'],
@@ -32,8 +32,8 @@ class VideoEntity extends Video {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = super.id;
-    data['user'] = super.user;
-    data['user_pic'] = super.userPic;
+    data['user'] = super.userName;
+    data['user_pic'] = super.userImage;
     data['video_title'] = super.videoTitle;
     data['song_name'] = super.songName;
     data['likes'] = super.likes;

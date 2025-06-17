@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social/core/components/custom_shadow.dart';
+import 'package:social/core/components/video_item.dart';
 import 'package:social/core/extensions/num_extensions.dart';
 import 'package:social/features/facebook/domain/models/post.dart';
 import 'package:social/features/facebook/presentation/components/comments_sheet.dart';
 import 'package:social/features/facebook/presentation/components/post_images.dart';
 import 'package:social/features/facebook/presentation/components/user_section.dart';
 import 'package:social/features/facebook/presentation/cubit/facebook_cubit.dart';
-import 'package:social/features/tiktok/presentation/components/tiktok_item.dart';
 
 import 'like_button.dart';
 
@@ -47,7 +47,7 @@ class PostItem extends StatelessWidget {
           PostImages(images: post.images!)
               :
           post.video != null ?
-          TiktokItem(link: post.video!)
+          VideoItem(link: post.video!)
               :
           const SizedBox(),
           8.ph,

@@ -1,64 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:social/features/tiktok/presentation/components/video_description.dart';
 import 'package:video_player/video_player.dart';
 
-class TiktokItem extends StatefulWidget {
+import '../../../../core/components/video_item.dart';
+import '../../domain/models/video.dart';
+import 'actions_toolbar.dart';
 
-  final String link;
-  const TiktokItem({super.key, required this.link});
+class TiktokItem extends StatelessWidget {
+  final Video video;
 
-  @override
-  State<TiktokItem> createState() => _TiktokItemState();
-}
-
-class _TiktokItemState extends State<TiktokItem> {
-  late VideoPlayerController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.link))
-      ..initialize().then((_) {
-        setState(() {});
-      });
-  }
+  const TiktokItem({super.key, required this.video});
 
   @override
   Widget build(BuildContext context) {
-    return _controller.value.isInitialized
-        ? Stack(
-          children: [
-            GestureDetector(
-              onTap: () {
-                _controller.value.isPlaying
-                    ? _controller.pause()
-                    : _controller.play();
-              },
-              child: AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(_controller),
-                  ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.grey
-                ),
-                padding: const EdgeInsets.all(8),
-                child: Icon(
-                  _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-                ),
-              ),
-            )
-          ],
-        )
-        : Container();
+    return Stack(
+      children: [
+        VideoItem(link: video.url ?? ''),
+        videoCard(video)
+      ],
+    );
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  Widget videoCard(Video video) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            VideoDescription(video.userName, video.videoTitle, video.songName),
+            ActionsToolbar(
+                video.likes ?? '',
+                video.comments ?? '',
+                video.userImage ?? ''
+            ),
+          ],
+        ),
+        SizedBox(height: 20)
+      ],
+    );
   }
 }

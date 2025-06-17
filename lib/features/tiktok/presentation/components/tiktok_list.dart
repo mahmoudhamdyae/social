@@ -23,7 +23,7 @@ class TiktokList extends StatelessWidget {
       animationDuration: const Duration(milliseconds: 400),
       controller: controller,
       builder: (BuildContext context, int index) {
-        return TiktokItem(link: videos[index].url ?? '');
+        return TiktokItem(video: videos[index]);
       },
     );
   }
