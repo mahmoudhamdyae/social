@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/app/helper_functions.dart';
+import '../../../../core/navigation/navigate_util.dart';
 
 class FileBottomSheet extends StatelessWidget {
   final Function(File file) onUpdated;
@@ -54,7 +55,7 @@ class FileBottomSheet extends StatelessWidget {
             _OutlineButton(
               onPressed: () {
                 HelperFunctions.pickImage(ImageSource.camera).then((value) {
-                  Navigator.pop(context);
+                  NavigateUtil.navigateUp(context);
                   value.fold((failure) {
                     HelperFunctions.showToastMessage(context, failure);
                   }, (file) {
@@ -74,7 +75,7 @@ class FileBottomSheet extends StatelessWidget {
             onPressed: () {
               if (uploadOnlyImage) {
                 HelperFunctions.pickImage(ImageSource.gallery).then((value) {
-                  Navigator.pop(context);
+                  NavigateUtil.navigateUp(context);
                   value.fold((failure) {
                     HelperFunctions.showToastMessage(context, failure);
                   }, (file) {
@@ -85,7 +86,7 @@ class FileBottomSheet extends StatelessWidget {
                 });
               } else {
                 HelperFunctions.pickFiles().then((value) {
-                  Navigator.pop(context);
+                  NavigateUtil.navigateUp(context);
                   value.fold((failure) {
                     HelperFunctions.showToastMessage(context, failure);
                   }, (files) {

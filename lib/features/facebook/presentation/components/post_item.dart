@@ -7,6 +7,7 @@ import 'package:social/features/facebook/presentation/components/comments_sheet.
 import 'package:social/features/facebook/presentation/components/post_images.dart';
 import 'package:social/features/facebook/presentation/components/user_section.dart';
 import 'package:social/features/facebook/presentation/cubit/facebook_cubit.dart';
+import 'package:social/features/tiktok/presentation/components/tiktok_item.dart';
 
 import 'like_button.dart';
 
@@ -43,7 +44,12 @@ class PostItem extends StatelessWidget {
           ),
           (post.images != null && post.images!.isNotEmpty ? 8 : 0).ph,
           post.images != null && post.images!.isNotEmpty ?
-          PostImages(images: post.images!) : const SizedBox(),
+          PostImages(images: post.images!)
+              :
+          post.video != null ?
+          TiktokItem(link: post.video!)
+              :
+          const SizedBox(),
           8.ph,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

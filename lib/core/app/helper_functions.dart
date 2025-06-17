@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:social/core/navigation/navigate_util.dart';
 import 'package:toast/toast.dart';
 
 
@@ -55,17 +56,8 @@ class HelperFunctions {
         allowMultiple: allowMultiple,
         onFileLoading: (status) {
           if (context != null) {
-            if (status == FilePickerStatus.picking) {
-              // showAppDialog(
-              //   context,
-              //   child: const FetchLoading(
-              //     color: Colors.white,
-              //   ),
-              // );
-            } else {
-              if (ModalRoute.of(context)?.isCurrent != true) {
-                Navigator.pop(context);
-              }
+            if (ModalRoute.of(context)?.isCurrent != true) {
+              NavigateUtil.navigateUp(context);
             }
           }
         },
