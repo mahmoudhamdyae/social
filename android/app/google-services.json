@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "579215239805",
+    "project_id": "social-a2e44",
+    "storage_bucket": "social-a2e44.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579215239805:android:6eedf53098f48d19945f14",
+        "android_client_info": {
+          "package_name": "com.mahmoudhamdyae.social"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFGMJGEWCJLfp1yzSYMXfp02QWBxAKxHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:social/core/extensions/num_extensions.dart';
+import 'package:social/features/facebook/presentaion/screens/facebook_screen.dart';
 import 'package:social/features/instagram/presentaion/screens/instagram_screen.dart';
 import 'package:social/features/tiktok/presentaion/screens/tiktok_screen.dart';
 
@@ -65,7 +66,7 @@ class MainScreenState extends State<MainScreen> {
 
   PersistentTabConfig _buildFacebook(BuildContext context) {
     return PersistentTabConfig(
-      screen: const TiktokScreen(),
+      screen: const FacebookScreen(),
       item: ItemConfig(
         icon: _getActiveWidget(AssetsManager.facebook, 'Facebook'),
         inactiveIcon: _getInActiveWidget(AssetsManager.facebook, 'Facebook'),
