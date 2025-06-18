@@ -13,7 +13,7 @@ class InstaList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: EdgeInsets.only(bottom: 20, top: MediaQuery.paddingOf(context).top + 16),
       itemCount: isLoading ? 3 : instas.length,
       separatorBuilder: (BuildContext context, int index) => 8.ph,
       itemBuilder: (BuildContext context, int index) {

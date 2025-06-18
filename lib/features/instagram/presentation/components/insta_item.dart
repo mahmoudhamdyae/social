@@ -60,7 +60,10 @@ class _InstaItemState extends State<InstaItem> {
                 itemCount: images.length + videos.length,
                 itemBuilder: (context, index) {
                   return index >= images.length ?
-                      VideoItem(link: videos[images.isEmpty ? index : (index % images.length)])
+                      VideoItem(
+                        link: videos[images.isEmpty ? index : (index % images.length)],
+                        respectAspectRatio: true,
+                      )
                       : CachedImage(
                     imageUrl: images[index],
                     fit: BoxFit.cover,

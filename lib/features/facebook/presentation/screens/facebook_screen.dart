@@ -17,7 +17,7 @@ class FacebookScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(child: (MediaQuery.paddingOf(context).top).ph),
+        SliverToBoxAdapter(child: (MediaQuery.paddingOf(context).top + 16).ph),
         SliverToBoxAdapter(
           child: BlocProvider<StoriesCubit>(
             create: (BuildContext context) =>

@@ -27,9 +27,9 @@ class MainScreenState extends State<MainScreen> {
     return PersistentTabView(
       controller: _controller,
       tabs: [
-        _buildFacebook(context),
-        _buildInstagram(context),
         _buildTikTok(context),
+        _buildInstagram(context),
+        _buildFacebook(context),
       ],
       navBarBuilder: (navBarConfig) => Style1BottomNavBar(
         navBarConfig: navBarConfig,

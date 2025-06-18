@@ -12,6 +12,7 @@ class CommentsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      padding: EdgeInsets.only(bottom: 20, top: MediaQuery.paddingOf(context).top + 32),
       itemCount: comments.length,
       separatorBuilder: (BuildContext context, int index) => 24.ph,
       itemBuilder: (BuildContext context, int index) {

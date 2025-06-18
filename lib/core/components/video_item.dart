@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoItem extends StatefulWidget {
-  final String link;
 
-  const VideoItem({super.key, required this.link});
+  final String link;
+  final bool respectAspectRatio;
+
+  const VideoItem({
+    super.key,
+    required this.link,
+    this.respectAspectRatio = false
+  });
 
   @override
   State<VideoItem> createState() => _VideoItemState();
@@ -61,8 +67,12 @@ class _VideoItemState extends State<VideoItem> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          AspectRatio(
+          widget.respectAspectRatio ? AspectRatio(
             aspectRatio: _controller.value.aspectRatio,
+            child: VideoPlayer(_controller),
+          ) : SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
             child: VideoPlayer(_controller),
           ),
           if (_showControls)

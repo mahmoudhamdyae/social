@@ -6,6 +6,7 @@ import '../../domain/models/video.dart';
 import 'actions_toolbar.dart';
 
 class TiktokItem extends StatelessWidget {
+
   final Video video;
 
   const TiktokItem({super.key, required this.video});
@@ -14,7 +15,11 @@ class TiktokItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        VideoItem(link: video.url ?? ''),
+        SizedBox(
+            height: MediaQuery.sizeOf(context).height - MediaQuery.paddingOf(context).vertical,
+            width: MediaQuery.sizeOf(context).width,
+            child: VideoItem(link: video.url ?? '')
+        ),
         videoContent(video)
       ],
     );

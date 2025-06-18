@@ -33,7 +33,7 @@ class PostItem extends StatelessWidget {
               userName: post.userName ?? '',
               userImage: post.userImage ?? ''
           ),
-          16.ph,
+          (post.post == null || post.post!.isEmpty ? 0 : 16).ph,
           // Post
           Text(
             post.post ?? '',
@@ -49,7 +49,7 @@ class PostItem extends StatelessWidget {
           PostImages(images: post.images!)
               :
           post.video != null ?
-          VideoItem(link: post.video!)
+          VideoItem(link: post.video!, respectAspectRatio: true,)
               :
           const SizedBox(),
           8.ph,

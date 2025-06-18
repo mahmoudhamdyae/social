@@ -5,7 +5,6 @@ import 'package:social/core/components/screens/loading_screen.dart';
 import 'package:social/features/tiktok/presentation/components/tiktok_list.dart';
 import 'package:social/features/tiktok/presentation/cubit/tiktok_cubit.dart';
 import 'package:social/features/tiktok/presentation/cubit/tiktok_states.dart';
-import 'package:tiktoklikescroller/tiktoklikescroller.dart';
 
 import '../../../comments/presentation/cubit/comments_cubit.dart';
 
@@ -28,22 +27,9 @@ class TiktokScreen extends StatelessWidget {
           return state is ErrorGetVideosState ? ErrorScreen(errorMessage: state.errorMessage)
           :
               state is SuccessGetVideosState ?
-          TiktokList(
-              videos: state.videos,
-              controller: Controller()..addListener((event) {
-                _handleCallbackEvent(event.direction, event.success);
-              })
-          ) : LoadingScreen();
+          TiktokList(videos: state.videos) : LoadingScreen();
         }
       ),
     );
-  }
-
-  void _handleCallbackEvent(
-      ScrollDirection direction, 
-      ScrollSuccess success,
-      {int? currentIndex}
-      ) {
-    debugPrint("Scroll callback received with data: {direction: $direction, success: $success and index: ${currentIndex ?? 'not given'}}");
   }
 }
