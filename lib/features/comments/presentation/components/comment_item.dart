@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social/core/extensions/num_extensions.dart';
-import 'package:social/features/facebook/domain/models/comment.dart';
+import 'package:social/features/comments/domain/models/comment.dart';
 import 'package:social/features/facebook/presentation/components/user_section.dart';
 
 class CommentItem extends StatelessWidget {

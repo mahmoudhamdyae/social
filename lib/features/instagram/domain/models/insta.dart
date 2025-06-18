@@ -1,16 +1,14 @@
-class Post {
+class Insta {
   int? id;
-  String? post;
   List<String>? images;
-  String? video;
+  List<String>? video;
   int? likesNo;
   int? commentNo;
   String? userName;
   String? userImage;
 
-  Post({
+  Insta({
     this.id,
-    this.post,
     this.images,
     this.video,
     this.likesNo,

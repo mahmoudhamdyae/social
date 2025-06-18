@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:social/features/facebook/domain/models/comment.dart';
+import 'package:social/features/comments/domain/models/comment.dart';
 
 class CommentEntity extends Comment {
 

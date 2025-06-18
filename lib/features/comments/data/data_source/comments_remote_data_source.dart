@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:social/core/enums/post_type.dart';
-import 'package:social/features/facebook/data/entities/comment_entity.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../entities/comment_entity.dart';
 
 abstract class CommentsRemoteDataSource {
 

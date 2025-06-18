@@ -6,7 +6,7 @@ import 'package:social/features/comments/domain/repository/comments_repository.d
 
 import '../../../../core/enums/post_type.dart';
 import '../../../../core/error/exceptions.dart';
-import '../../../facebook/domain/models/comment.dart';
+import '../../domain/models/comment.dart';
 
 class CommentsRepositoryImpl implements CommentsRepository {
 

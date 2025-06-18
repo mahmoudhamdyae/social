@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:social/core/enums/post_type.dart';
 import 'package:social/core/error/failure.dart';
 
-import '../../../facebook/domain/models/comment.dart';
+import '../models/comment.dart';
 
 abstract class CommentsRepository {
 
