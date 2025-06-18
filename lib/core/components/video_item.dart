@@ -1,9 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoItem extends StatefulWidget {
-
   final String link;
+
   const VideoItem({super.key, required this.link});
 
   @override
@@ -12,6 +13,8 @@ class VideoItem extends StatefulWidget {
 
 class _VideoItemState extends State<VideoItem> {
   late VideoPlayerController _controller;
+  bool _showControls = false;
+  Timer? _hideTimer;
 
   @override
   void initState() {
@@ -24,41 +27,62 @@ class _VideoItemState extends State<VideoItem> {
 
   @override
   void dispose() {
+    _hideTimer?.cancel();
     _controller.dispose();
     super.dispose();
+  }
+
+  void _toggleControls() {
+    setState(() {
+      _showControls = true;
+    });
+    _hideTimer?.cancel();
+    _hideTimer = Timer(const Duration(seconds: 2), () {
+      setState(() {
+        _showControls = false;
+      });
+    });
+  }
+
+  void _onTapVideo() {
+    if (_controller.value.isPlaying) {
+      _controller.pause();
+    } else {
+      _controller.play();
+    }
+    _toggleControls();
   }
 
   @override
   Widget build(BuildContext context) {
     return _controller.value.isInitialized
-        ? Stack(
-      children: [
-        GestureDetector(
-          onTap: () {
-            _controller.value.isPlaying
-                ? _controller.pause()
-                : _controller.play();
-          },
-          child: AspectRatio(
+        ? GestureDetector(
+      onTap: _onTapVideo,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          AspectRatio(
             aspectRatio: _controller.value.aspectRatio,
             child: VideoPlayer(_controller),
           ),
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: Container(
-            decoration: BoxDecoration(
+          if (_showControls)
+            Container(
+              decoration: const BoxDecoration(
+                color: Colors.black38,
                 shape: BoxShape.circle,
-                color: Colors.grey
+              ),
+              padding: const EdgeInsets.all(12),
+              child: Icon(
+                _controller.value.isPlaying
+                    ? Icons.pause
+                    : Icons.play_arrow,
+                color: Colors.white,
+                size: 32,
+              ),
             ),
-            padding: const EdgeInsets.all(8),
-            child: Icon(
-              _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-            ),
-          ),
-        )
-      ],
+        ],
+      ),
     )
-        : Container();
+        : const Center(child: CircularProgressIndicator());
   }
 }
