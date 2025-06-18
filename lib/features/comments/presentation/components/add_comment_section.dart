@@ -37,6 +37,7 @@ class _AddCommentSectionState extends State<AddCommentSection> {
                   decoration: InputDecoration(
                     hintText: 'Write a comment...',
                   ),
+                  keyboardType: TextInputType.multiline,
                   validator: (value) => value!.isEmpty ? 'Please enter a comment' : null,
                   controller: BlocProvider.of<CommentsCubit>(context).addCommentController,
                 )
