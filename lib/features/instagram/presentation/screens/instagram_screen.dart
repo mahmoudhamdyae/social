@@ -24,13 +24,14 @@ class InstagramScreen extends StatelessWidget {
             curr is ErrorGetInstaState ||
             curr is SuccessGetInstaState,
         builder: (context, state) {
-          return state is LoadingGetInstaState
-              ? LoadingScreen()
-              : state is ErrorGetInstaState
+          return state is ErrorGetInstaState
               ? ErrorScreen(
                   errorMessage: state.errorMessage ?? '')
-              : state is SuccessGetInstaState
-              ? InstaList(instas: state.insta)
+              : state is SuccessGetInstaState || state is LoadingGetInstaState
+              ? InstaList(
+              instas: state is SuccessGetInstaState ? state.insta : [],
+            isLoading: state is LoadingGetInstaState,
+          )
               : const SizedBox();
         },
       ),
