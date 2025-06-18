@@ -45,13 +45,13 @@ class _LikeButtonState extends State<LikeButton> {
           children: [
             Icon(
               Icons.thumb_up_alt_outlined,
-              color: isLiked ? Theme.of(context).colorScheme.secondary : Colors.black87,
+              color: isLiked ? Theme.of(context).colorScheme.primary : Colors.black87,
             ),
             16.pw,
             Text(
               'Like',
               style: TextStyle(
-                color: isLiked ? Theme.of(context).colorScheme.secondary : Colors.black87,
+                color: isLiked ? Theme.of(context).colorScheme.primary : Colors.black87,
               ),
             ),
           ],

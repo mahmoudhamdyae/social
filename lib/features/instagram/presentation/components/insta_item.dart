@@ -104,8 +104,9 @@ class _InstaItemState extends State<InstaItem> {
                   children: [
                     16.pw,
                     Icon(Icons.comment_outlined),
-                    8.pw,
-                    Text('${widget.insta.commentNo ?? 0}')
+                    (widget.insta.commentNo == null || widget.insta.commentNo == 0 ? 0 : 8).pw,
+                    widget.insta.commentNo == null || widget.insta.commentNo == 0 ?
+                    const SizedBox() : Text('${widget.insta.commentNo ?? 0}')
                   ],
                 ),
               ),

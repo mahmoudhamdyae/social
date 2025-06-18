@@ -78,7 +78,7 @@ class PostItem extends StatelessWidget {
                 ],
               ),
               // No of Comments
-              InkWell(
+              post.commentNo == 0 ? const SizedBox() : InkWell(
                 onTap: () { _onClickComments(context); },
                 child: Text(
                   '${post.commentNo ?? 0} comments'
