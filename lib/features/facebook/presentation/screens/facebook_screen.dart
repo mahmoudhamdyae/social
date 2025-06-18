@@ -21,7 +21,8 @@ class FacebookScreen extends StatelessWidget {
         SliverToBoxAdapter(child: (MediaQuery.paddingOf(context).top).ph),
         SliverToBoxAdapter(
           child: BlocProvider<StoriesCubit>(
-            create: (BuildContext context) => StoriesCubit.getInstance()..getStories(),
+            create: (BuildContext context) =>
+                StoriesCubit.getInstance()..getStories(),
             child: BlocBuilder<StoriesCubit, StoriesState>(
               buildWhen: (prev, curr) =>
                   curr is LoadingGetStoriesState ||
@@ -30,11 +31,14 @@ class FacebookScreen extends StatelessWidget {
               builder: (context, state) {
                 return SizedBox(
                   height: 200,
-                  child: state is SuccessGetStoriesState || state is LoadingGetStoriesState
+                  child: state is SuccessGetStoriesState ||
+                          state is LoadingGetStoriesState
                       ? StoryList(
-                    stories: state is SuccessGetStoriesState ? state.stories : [],
-                    isLoading: state is LoadingGetStoriesState,
-                  )
+                          stories: state is SuccessGetStoriesState
+                              ? state.stories
+                              : [],
+                          isLoading: state is LoadingGetStoriesState,
+                        )
                       : const SizedBox(),
                 );
               },
@@ -43,7 +47,8 @@ class FacebookScreen extends StatelessWidget {
         ),
         MultiBlocProvider(
           providers: [
-            BlocProvider(create: (_) => FacebookCubit.getInstance()..getPosts()),
+            BlocProvider(
+                create: (_) => FacebookCubit.getInstance()..getPosts()),
             BlocProvider(create: (_) => CommentsCubit.getInstance()),
           ],
           child: BlocBuilder<FacebookCubit, FacebookStates>(
@@ -52,14 +57,18 @@ class FacebookScreen extends StatelessWidget {
                 curr is ErrorGetPostsState ||
                 curr is SuccessGetPostsState,
             builder: (context, state) {
-              return state is LoadingGetPostsState
-                  ? SliverToBoxAdapter(child: LoadingScreen())
-                  : state is ErrorGetPostsState
+              return state is ErrorGetPostsState
                       ? SliverToBoxAdapter(
                           child: ErrorScreen(
                               errorMessage: state.errorMessage ?? ''))
-                      : state is SuccessGetPostsState
-                          ? PostsList(posts: state.posts)
+                      : state is SuccessGetPostsState ||
+                              state is LoadingGetPostsState
+                          ? PostsList(
+                              posts: state is SuccessGetPostsState
+                                  ? state.posts
+                                  : [],
+                              isLoading: state is LoadingGetPostsState,
+                            )
                           : const SliverToBoxAdapter(child: SizedBox());
             },
           ),
