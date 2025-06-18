@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:social/core/extensions/num_extensions.dart';
+import 'package:social/features/facebook/presentation/screens/images_screen.dart';
 
 import '../../../../core/components/cached_image.dart';
 
@@ -44,43 +46,55 @@ class PostImages extends StatelessWidget {
       );
     } else {
       final int shownImages = imageCount > 4 ? 4 : imageCount;
-      return GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: shownImages,
-        padding: EdgeInsets.zero,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: spacing,
-          mainAxisSpacing: spacing,
-        ),
-        itemBuilder: (context, index) {
-          if (index == 3 && imageCount > 4) {
-            return Stack(
-              fit: StackFit.expand,
-              children: [
-                _buildImage(images[index]),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    color: Colors.black45,
-                  ),
-                  child: Center(
-                    child: Text(
-                      '+${imageCount - 4}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            );
-          }
-          return _buildImage(images[index]);
+      return InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (context) => ImagesScreen(images: images,),
+            ),
+          );
         },
+        child: IgnorePointer(
+          child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: shownImages,
+            padding: EdgeInsets.zero,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: spacing,
+              mainAxisSpacing: spacing,
+            ),
+            itemBuilder: (context, index) {
+              if (index == 3 && imageCount > 4) {
+                return Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    _buildImage(images[index]),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: Colors.black45,
+                      ),
+                      child: Center(
+                        child: Text(
+                          '+${imageCount - 4}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              }
+              return _buildImage(images[index]);
+            },
+          ),
+        ),
       );
     }
   }
