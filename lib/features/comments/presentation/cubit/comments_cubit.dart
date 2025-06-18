@@ -38,9 +38,9 @@ class CommentsCubit extends Cubit<CommentsStates> {
     instance.get<DislikeUseCase>(),
   );
 
-  int? postId;
+  String? postId;
 
-  void getComments(int postId, PostType type) {
+  void getComments(String postId, PostType type) {
     if (this.postId != postId) {
       this.postId = postId;
       emit(LoadingGetCommentsState());
@@ -48,7 +48,7 @@ class CommentsCubit extends Cubit<CommentsStates> {
     _getComments(postId, type);
   }
 
-  Future<void> _getComments(int postId, PostType type) async {
+  Future<void> _getComments(String postId, PostType type) async {
      await _getCommentsUseCase.call(postId, type).then((response) {
       response.fold((error) {
         emit(ErrorGetCommentsState(error.message));
@@ -58,7 +58,7 @@ class CommentsCubit extends Cubit<CommentsStates> {
     });
   }
 
-  void addComment(int postId, PostType type) {
+  void addComment(String postId, PostType type) {
     this.postId = postId;
     emit(LoadingAddCommentState());
     _addCommentUseCase.call(addCommentController.text, postId, type).then((response) {

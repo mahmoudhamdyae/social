@@ -14,7 +14,7 @@ class CommentsRepositoryImpl implements CommentsRepository {
   CommentsRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<Either<Failure, List<Comment>>> getComments(int postId, PostType type) async {
+  Future<Either<Failure, List<Comment>>> getComments(String postId, PostType type) async {
     try {
       final result = await _remoteDataSource.getComments(postId, type);
       return Right(result);
@@ -24,7 +24,7 @@ class CommentsRepositoryImpl implements CommentsRepository {
   }
 
   @override
-  Future<Either<Failure, void>> addComment(String comment, int postId, PostType type) async {
+  Future<Either<Failure, void>> addComment(String comment, String postId, PostType type) async {
     try {
       await _remoteDataSource.addComment(comment, postId, type);
       return const Right(null);

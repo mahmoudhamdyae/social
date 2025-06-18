@@ -9,8 +9,14 @@ import '../cubit/comments_state.dart';
 
 class AddCommentSection extends StatefulWidget {
 
-  final int postId;
-  const AddCommentSection({super.key, required this.postId});
+  final String postId;
+  final PostType postType;
+
+  const AddCommentSection({
+    super.key,
+    required this.postId,
+    required this.postType
+  });
 
   @override
   State<AddCommentSection> createState() => _AddCommentSectionState();
@@ -71,7 +77,7 @@ class _AddCommentSectionState extends State<AddCommentSection> {
     var formData = formState.currentState;
     if (formData!.validate()) {
       formData.save();
-      BlocProvider.of<CommentsCubit>(context).addComment(widget.postId, PostType.facebook);
+      BlocProvider.of<CommentsCubit>(context).addComment(widget.postId, widget.postType);
     }
   }
 }

@@ -7,8 +7,8 @@ import '../../../../core/error/exceptions.dart';
 
 abstract class CommentsRemoteDataSource {
 
-  Future<List<CommentEntity>> getComments(int postId, PostType type);
-  Future<void> addComment(String comment, int postId, PostType type);
+  Future<List<CommentEntity>> getComments(String postId, PostType type);
+  Future<void> addComment(String comment, String postId, PostType type);
   Future<void> like(String postId, PostType type);
   Future<void> dislike(String postId, PostType type);
 
@@ -21,12 +21,12 @@ class CommentsRemoteDataSourceImpl extends CommentsRemoteDataSource {
   CommentsRemoteDataSourceImpl(super.db);
 
   @override
-  Future<List<CommentEntity>> getComments(int postId, PostType type) async {
+  Future<List<CommentEntity>> getComments(String postId, PostType type) async {
     List<CommentEntity> comments = [];
     try {
       CollectionReference postsRef = db.collection(type.title);
       await postsRef
-          .doc('$postId')
+          .doc(postId)
           .collection('comments')
           .orderBy('timestamp', descending: true)
           .get().then((event) {
@@ -41,16 +41,16 @@ class CommentsRemoteDataSourceImpl extends CommentsRemoteDataSource {
   }
 
   @override
-  Future<void> addComment(String comment, int postId, PostType type) async {
+  Future<void> addComment(String comment, String postId, PostType type) async {
     try {
       CollectionReference postsRef = db.collection(type.title);
-      await postsRef.doc('$postId').collection('comments').add(CommentEntity(
+      await postsRef.doc(postId).collection('comments').add(CommentEntity(
         id: Uuid().v4(),
         userName: 'Anonymous',
         userImage: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         comment: comment,
       ).toJson());
-      await postsRef.doc('$postId').update({type.commentNo : FieldValue.increment(1)});
+      await postsRef.doc(postId).update({type.commentNo : FieldValue.increment(1)});
     } on Exception catch (error) {
       throw ServerException(errorMessage: error.toString());
     }
@@ -59,7 +59,6 @@ class CommentsRemoteDataSourceImpl extends CommentsRemoteDataSource {
   @override
   Future<void> like(String postId, PostType type) async {
     try {
-      print('-----A------ $postId');
       CollectionReference postsRef = db.collection(type.title);
       await postsRef.doc(postId).update({type.likesNo : FieldValue.increment(1)});
     } on Exception catch (error) {

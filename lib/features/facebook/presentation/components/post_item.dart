@@ -126,7 +126,6 @@ class PostItem extends StatelessWidget {
   }
 
   void _onClickComments(BuildContext context) {
-    BlocProvider.of<CommentsCubit>(context).getComments(post.id ?? -1, PostType.facebook);
     showModalBottomSheet(
         context: context,
         useRootNavigator: true,
@@ -135,10 +134,11 @@ class PostItem extends StatelessWidget {
             MultiBlocProvider(
               providers: [
                 BlocProvider.value(value: context.read<FacebookCubit>()),
-                BlocProvider.value(value: context.read<CommentsCubit>()),
+                BlocProvider.value(value: context.read<CommentsCubit>()..getComments('${post.id ?? -1}', PostType.facebook)),
               ],
               child: CommentsSheet(
-                postId: post.id ?? -1,
+                postId: '${post.id ?? -1}',
+                postType: PostType.facebook,
               ),
             )
     );

@@ -9,7 +9,7 @@ class AddCommentUseCase {
   final CommentsRepository _repository;
   AddCommentUseCase(this._repository);
 
-  Future<Either<Failure, void>> call(String comment, int postId, PostType type) async {
+  Future<Either<Failure, void>> call(String comment, String postId, PostType type) async {
     return _repository.addComment(comment, postId, type);
   }
 }

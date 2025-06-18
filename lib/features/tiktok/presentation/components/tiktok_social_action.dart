@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social/features/tiktok/presentation/cubit/tiktok_cubit.dart';
 
 import '../../../../core/enums/post_type.dart';
+import '../../../comments/presentation/components/comments_sheet.dart';
 import '../../../comments/presentation/cubit/comments_cubit.dart';
 
 class TiktokSocialAction extends StatefulWidget {
@@ -11,6 +12,7 @@ class TiktokSocialAction extends StatefulWidget {
   final String title;
   final IconData icon;
   final bool isFav;
+  final bool isComment;
 
   const TiktokSocialAction({
     super.key,
@@ -18,6 +20,7 @@ class TiktokSocialAction extends StatefulWidget {
     required this.title,
     required this.icon,
     this.isFav = false,
+    this.isComment = false,
   });
 
   @override
@@ -32,18 +35,9 @@ class _TiktokSocialActionState extends State<TiktokSocialAction> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: widget.isFav ? () {
-        if (isLiked) {
-          BlocProvider.of<CommentsCubit>(context).dislikePost(widget.postId, PostType.tiktok, () {
-            BlocProvider.of<TiktokCubit>(context).getVideosWithoutLoading();
-          });
-          isLiked = false;
-        } else {
-          BlocProvider.of<CommentsCubit>(context).likePost(widget.postId, PostType.tiktok, () {
-            BlocProvider.of<TiktokCubit>(context).getVideosWithoutLoading();
-          });
-          isLiked = true;
-        }
-        setState(() {});
+        _onClickFav(context);
+      } : widget.isComment ? () {
+        _onClickComments(context);
       } : null,
       child: Container(
           margin: EdgeInsets.only(top: 15.0),
@@ -66,6 +60,40 @@ class _TiktokSocialActionState extends State<TiktokSocialAction> {
               ),
             )
           ])),
+    );
+  }
+
+  void _onClickFav(BuildContext context) {
+    if (isLiked) {
+      BlocProvider.of<CommentsCubit>(context).dislikePost(widget.postId, PostType.tiktok, () {
+        BlocProvider.of<TiktokCubit>(context).getVideosWithoutLoading();
+      });
+      isLiked = false;
+    } else {
+      BlocProvider.of<CommentsCubit>(context).likePost(widget.postId, PostType.tiktok, () {
+        BlocProvider.of<TiktokCubit>(context).getVideosWithoutLoading();
+      });
+      isLiked = true;
+    }
+    setState(() {});
+  }
+
+  void _onClickComments(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        useRootNavigator: true,
+        isScrollControlled: true,
+        builder: (_) =>
+            MultiBlocProvider(
+              providers: [
+                BlocProvider.value(value: context.read<TiktokCubit>()),
+                BlocProvider.value(value: context.read<CommentsCubit>()..getComments(widget.postId, PostType.tiktok)),
+              ],
+              child: CommentsSheet(
+                postId: widget.postId,
+                postType: PostType.tiktok,
+              ),
+            )
     );
   }
 }

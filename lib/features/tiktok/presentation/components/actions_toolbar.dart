@@ -29,7 +29,7 @@ class ActionsToolbar extends StatelessWidget {
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         _getFollowAction(pictureUrl: userImage),
         TiktokSocialAction(icon: Icons.favorite, title: numLikes, isFav: true, postId: postId,),
-        TiktokSocialAction(icon: Icons.chat, title: numComments, postId: postId,),
+        TiktokSocialAction(icon: Icons.chat, title: numComments, postId: postId, isComment: true,),
         TiktokSocialAction(icon: Icons.reply, title: 'Share', postId: postId,),
         _getMusicPlayerAction(userImage)
       ]),

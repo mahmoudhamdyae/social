@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social/core/components/screens/loading_screen.dart';
+import 'package:social/core/enums/post_type.dart';
 import 'package:social/core/extensions/num_extensions.dart';
 import 'package:social/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social/features/comments/presentation/components/empty_comments.dart';
+import 'package:social/features/tiktok/presentation/cubit/tiktok_cubit.dart';
 
 import '../../../../core/components/screens/error_screen.dart';
 import '../../../facebook/presentation/cubit/facebook_cubit.dart';
@@ -13,11 +15,13 @@ import 'comments_list.dart';
 
 class CommentsSheet extends StatelessWidget {
 
-  final int postId;
+  final String postId;
+  final PostType postType;
 
   const CommentsSheet({
     super.key,
-    required this.postId
+    required this.postId,
+    required this.postType
   });
 
   @override
@@ -29,7 +33,15 @@ class CommentsSheet extends StatelessWidget {
           current is SuccessAddCommentState,
       listener: (BuildContext context, CommentsStates state) {
         if (state is SuccessAddCommentState) {
-          BlocProvider.of<FacebookCubit>(context).getPostsWithoutLoading();
+          switch(postType) {
+            case PostType.facebook:
+              BlocProvider.of<FacebookCubit>(context).getPostsWithoutLoading();
+            case PostType.instagram:
+              // TODO: Handle this case.
+              throw UnimplementedError();
+            case PostType.tiktok:
+              BlocProvider.of<TiktokCubit>(context).getVideosWithoutLoading();
+          }
         }
       },
       buildWhen: (previous, current) =>
@@ -55,7 +67,7 @@ class CommentsSheet extends StatelessWidget {
                     CommentsList(comments: state.comments)
                 ),
                 16.ph,
-                AddCommentSection(postId: postId),
+                AddCommentSection(postId: postId, postType: postType,),
                 (MediaQuery.paddingOf(context).bottom + 16).ph,
               ],
             ),
