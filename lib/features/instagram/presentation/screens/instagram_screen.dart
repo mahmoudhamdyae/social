@@ -4,7 +4,6 @@ import 'package:social/features/instagram/presentation/cubit/insta_cubit.dart';
 import 'package:social/features/instagram/presentation/cubit/insta_states.dart';
 
 import '../../../../core/components/screens/error_screen.dart';
-import '../../../../core/components/screens/loading_screen.dart';
 import '../../../comments/presentation/cubit/comments_cubit.dart';
 import '../components/insta_list.dart';
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social/core/components/screens/error_screen.dart';
-import 'package:social/core/components/screens/loading_screen.dart';
 import 'package:social/core/extensions/num_extensions.dart';
 import 'package:social/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social/features/facebook/presentation/components/posts_list.dart';

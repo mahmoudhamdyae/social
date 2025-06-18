@@ -89,7 +89,7 @@ class ActionsToolbar extends StatelessWidget {
     Colors.grey[900]!,
     Colors.grey[900]!,
     Colors.grey[800]!
-  ], stops: [
+  ], stops: const [
     0.0,
     0.4,
     0.6,
