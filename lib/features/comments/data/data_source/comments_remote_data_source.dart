@@ -9,8 +9,8 @@ abstract class CommentsRemoteDataSource {
 
   Future<List<CommentEntity>> getComments(int postId, PostType type);
   Future<void> addComment(String comment, int postId, PostType type);
-  Future<void> like(int postId, PostType type);
-  Future<void> dislike(int postId, PostType type);
+  Future<void> like(String postId, PostType type);
+  Future<void> dislike(String postId, PostType type);
 
   final FirebaseFirestore db;
   CommentsRemoteDataSource(this.db);
@@ -57,20 +57,21 @@ class CommentsRemoteDataSourceImpl extends CommentsRemoteDataSource {
   }
 
   @override
-  Future<void> like(int postId, PostType type) async {
+  Future<void> like(String postId, PostType type) async {
     try {
+      print('-----A------ $postId');
       CollectionReference postsRef = db.collection(type.title);
-      await postsRef.doc('$postId').update({type.likesNo : FieldValue.increment(1)});
+      await postsRef.doc(postId).update({type.likesNo : FieldValue.increment(1)});
     } on Exception catch (error) {
       throw ServerException(errorMessage: error.toString());
     }
   }
 
   @override
-  Future<void> dislike(int postId, PostType type) async {
+  Future<void> dislike(String postId, PostType type) async {
     try {
       CollectionReference postsRef = db.collection(type.title);
-      await postsRef.doc('$postId').update({type.likesNo : FieldValue.increment(-1)});
+      await postsRef.doc(postId).update({type.likesNo : FieldValue.increment(-1)});
     } on Exception catch (error) {
       throw ServerException(errorMessage: error.toString());
     }

@@ -72,7 +72,7 @@ class CommentsCubit extends Cubit<CommentsStates> {
     });
   }
 
-  void likePost(int postId, PostType type, Function() getPosts) {
+  void likePost(String postId, PostType type, Function() getPosts) {
     emit(LoadingLikeState());
     _likeUseCase.call(postId, type).then((response) {
       response.fold((error) {
@@ -84,7 +84,7 @@ class CommentsCubit extends Cubit<CommentsStates> {
     });
   }
 
-  void dislikePost(int postId, PostType type, Function() getPosts) {
+  void dislikePost(String postId, PostType type, Function() getPosts) {
     emit(LoadingDislikeState());
     _dislikeUseCase.call(postId, type).then((response) {
       response.fold((error) {

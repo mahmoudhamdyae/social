@@ -7,13 +7,18 @@ import 'package:social/features/tiktok/presentation/cubit/tiktok_cubit.dart';
 import 'package:social/features/tiktok/presentation/cubit/tiktok_states.dart';
 import 'package:tiktoklikescroller/tiktoklikescroller.dart';
 
+import '../../../comments/presentation/cubit/comments_cubit.dart';
+
 class TiktokScreen extends StatelessWidget {
   const TiktokScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => TiktokCubit.getInstance()..getVideos(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => TiktokCubit.getInstance()..getVideos()),
+        BlocProvider(create: (_) => CommentsCubit.getInstance()),
+      ],
       child: BlocBuilder<TiktokCubit, TiktokState>(
         buildWhen: (previous, current) =>
             current is LoadingGetVideosState ||

@@ -38,27 +38,27 @@ class FacebookScreen extends StatelessWidget {
             ),
           ),
         ),
-        BlocProvider<FacebookCubit>(
-          create: (_) => FacebookCubit.getInstance()..getPosts(),
-          child: BlocProvider<CommentsCubit>(
-            create: (_) => CommentsCubit.getInstance(),
-            child: BlocBuilder<FacebookCubit, FacebookStates>(
-              buildWhen: (prev, curr) =>
-                  curr is LoadingGetPostsState ||
-                  curr is ErrorGetPostsState ||
-                  curr is SuccessGetPostsState,
-              builder: (context, state) {
-                return state is LoadingGetPostsState
-                    ? SliverToBoxAdapter(child: LoadingScreen())
-                    : state is ErrorGetPostsState
-                        ? SliverToBoxAdapter(
-                            child: ErrorScreen(
-                                errorMessage: state.errorMessage ?? ''))
-                        : state is SuccessGetPostsState
-                            ? PostsList(posts: state.posts)
-                            : const SliverToBoxAdapter(child: SizedBox());
-              },
-            ),
+        MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => FacebookCubit.getInstance()..getPosts()),
+            BlocProvider(create: (_) => CommentsCubit.getInstance()),
+          ],
+          child: BlocBuilder<FacebookCubit, FacebookStates>(
+            buildWhen: (prev, curr) =>
+                curr is LoadingGetPostsState ||
+                curr is ErrorGetPostsState ||
+                curr is SuccessGetPostsState,
+            builder: (context, state) {
+              return state is LoadingGetPostsState
+                  ? SliverToBoxAdapter(child: LoadingScreen())
+                  : state is ErrorGetPostsState
+                      ? SliverToBoxAdapter(
+                          child: ErrorScreen(
+                              errorMessage: state.errorMessage ?? ''))
+                      : state is SuccessGetPostsState
+                          ? PostsList(posts: state.posts)
+                          : const SliverToBoxAdapter(child: SizedBox());
+            },
           ),
         ),
       ],

@@ -28,17 +28,4 @@ class VideoEntity extends Video {
       url: json['url'],
     );
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = super.id;
-    data['user'] = super.userName;
-    data['user_pic'] = super.userImage;
-    data['video_title'] = super.videoTitle;
-    data['song_name'] = super.songName;
-    data['likes'] = super.likes;
-    data['comments'] = super.comments;
-    data['url'] = super.url;
-    return data;
-  }
 }

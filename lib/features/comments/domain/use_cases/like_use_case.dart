@@ -9,7 +9,7 @@ class LikeUseCase {
   final CommentsRepository _repository;
   LikeUseCase(this._repository);
 
-  Future<Either<Failure, void>> call(int postId, PostType type) async {
+  Future<Either<Failure, void>> call(String postId, PostType type) async {
     return _repository.like(postId, type);
   }
 }

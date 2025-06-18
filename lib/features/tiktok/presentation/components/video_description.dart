@@ -3,12 +3,12 @@ import 'package:social/core/extensions/num_extensions.dart';
 
 class VideoDescription extends StatelessWidget {
   final String userName;
-  final String videtoTitle;
+  final String videoTitle;
   final String songInfo;
 
   const VideoDescription(
       this.userName,
-      this.videtoTitle,
+      this.videoTitle,
       this.songInfo,
       {super.key}
       );
@@ -33,7 +33,7 @@ class VideoDescription extends StatelessWidget {
                   ),
                   7.ph,
                   Text(
-                    videtoTitle,
+                    videoTitle,
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,

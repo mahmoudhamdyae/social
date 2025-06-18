@@ -34,7 +34,7 @@ class CommentsRepositoryImpl implements CommentsRepository {
   }
 
   @override
-  Future<Either<Failure, void>> like(int postId, PostType type) async {
+  Future<Either<Failure, void>> like(String postId, PostType type) async {
     try {
       await _remoteDataSource.like(postId, type);
       return const Right(null);
@@ -44,7 +44,7 @@ class CommentsRepositoryImpl implements CommentsRepository {
   }
 
   @override
-  Future<Either<Failure, void>> dislike(int postId, PostType type) async {
+  Future<Either<Failure, void>> dislike(String postId, PostType type) async {
     try {
       await _remoteDataSource.dislike(postId, type);
       return const Right(null);

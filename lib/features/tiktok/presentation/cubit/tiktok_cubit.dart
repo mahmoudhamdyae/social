@@ -18,6 +18,10 @@ class TiktokCubit extends Cubit<TiktokState> {
 
   void getVideos() {
     emit(LoadingGetVideosState());
+    getVideosWithoutLoading();
+  }
+
+  void getVideosWithoutLoading() {
     _getVideosUseCase.call().then((response) {
       response.fold((error) {
         emit(ErrorGetVideosState(error.message));

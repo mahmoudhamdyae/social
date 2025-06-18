@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social/core/components/cached_image.dart';
-// import 'package:tiktok_flutter/utils/tik_tok_icons_icons.dart';
-// import 'package:tiktok_flutter/widgets/circle_image_animation.dart';
+import 'package:social/features/tiktok/presentation/components/tiktok_social_action.dart';
 
 class ActionsToolbar extends StatelessWidget {
 
@@ -14,8 +13,14 @@ class ActionsToolbar extends StatelessWidget {
   final String numLikes;
   final String numComments;
   final String userImage;
+  final String postId;
 
-  const ActionsToolbar(this.numLikes, this.numComments, this.userImage, {super.key});
+  const ActionsToolbar(
+      this.numLikes,
+      this.numComments,
+      this.userImage,
+      {super.key, required this.postId}
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -23,32 +28,12 @@ class ActionsToolbar extends StatelessWidget {
       width: 100.0,
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         _getFollowAction(pictureUrl: userImage),
-        _getSocialAction(icon: Icons.favorite, title: numLikes),
-        _getSocialAction(icon: Icons.chat, title: numComments),
-        _getSocialAction(
-            icon: Icons.reply, title: 'Share', isShare: true),
+        TiktokSocialAction(icon: Icons.favorite, title: numLikes, isFav: true, postId: postId,),
+        TiktokSocialAction(icon: Icons.chat, title: numComments, postId: postId,),
+        TiktokSocialAction(icon: Icons.reply, title: 'Share', postId: postId,),
         _getMusicPlayerAction(userImage)
       ]),
     );
-  }
-
-  Widget _getSocialAction(
-      {required String title, required IconData icon, bool isShare = false}) {
-    return Container(
-        margin: EdgeInsets.only(top: 15.0),
-        width: 70.0,
-        height: 70.0,
-        child: Column(children: [
-          Icon(icon, size: isShare ? 25.0 : 35.0, color: Colors.grey[300]),
-          Padding(
-            padding: EdgeInsets.only(top: isShare ? 8.0 : 8.0),
-            child: Text(title,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: isShare ? 14.0 : 14.0)),
-          )
-        ]));
   }
 
   Widget _getFollowAction({required String pictureUrl}) {

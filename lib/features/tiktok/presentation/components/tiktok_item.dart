@@ -34,9 +34,10 @@ class TiktokItem extends StatelessWidget {
                 video.songName ?? ''
             ),
             ActionsToolbar(
-                video.likes ?? '',
-                video.comments ?? '',
-                video.userImage ?? ''
+                '${video.likes ?? 0}',
+                '${video.comments ?? 0}',
+                video.userImage ?? '',
+                postId: video.id ?? '',
             ),
           ],
         ),

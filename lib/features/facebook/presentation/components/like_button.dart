@@ -28,12 +28,12 @@ class _LikeButtonState extends State<LikeButton> {
     return InkWell(
         onTap: () {
           if (isLiked) {
-            BlocProvider.of<CommentsCubit>(context).dislikePost(widget.post.id!, PostType.facebook, () {
+            BlocProvider.of<CommentsCubit>(context).dislikePost(widget.post.id!.toString(), PostType.facebook, () {
               BlocProvider.of<FacebookCubit>(context).getPostsWithoutLoading();
             });
             isLiked = false;
           } else {
-            BlocProvider.of<CommentsCubit>(context).likePost(widget.post.id!, PostType.facebook, () {
+            BlocProvider.of<CommentsCubit>(context).likePost(widget.post.id!.toString(), PostType.facebook, () {
               BlocProvider.of<FacebookCubit>(context).getPostsWithoutLoading();
             });
             isLiked = true;

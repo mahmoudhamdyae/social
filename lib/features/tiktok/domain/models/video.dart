@@ -1,13 +1,11 @@
-import 'package:video_player/video_player.dart';
-
 class Video {
   String? id;
   String? userName;
   String? userImage;
   String? videoTitle;
   String? songName;
-  String? likes;
-  String? comments;
+  int? likes;
+  int? comments;
   String? url;
 
   Video({
