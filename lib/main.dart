@@ -1,3 +1,4 @@
+import 'package:connectivity_monitor/connectivity_monitor.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -11,5 +12,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await initAppModule();
+
+  ConnectivityService.startConnectionNotifier(
+    connectedToastMessage: "Connected!",
+    disconnectedToastMessage: "No Internet Connection.",
+    showToasts: true,
+  );
+
   runApp(const MyApp());
 }
