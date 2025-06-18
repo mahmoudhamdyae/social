@@ -131,11 +131,11 @@ class PostItem extends StatelessWidget {
         context: context,
         useRootNavigator: true,
         isScrollControlled: true,
-        builder: (BuildContext builderContext) =>
+        builder: (_) =>
             MultiBlocProvider(
               providers: [
-                BlocProvider(create: (_) => BlocProvider.of<FacebookCubit>(context)),
-                BlocProvider(create: (_) => BlocProvider.of<CommentsCubit>(context)),
+                BlocProvider.value(value: context.read<FacebookCubit>()),
+                BlocProvider.value(value: context.read<CommentsCubit>()),
               ],
               child: CommentsSheet(
                 postId: post.id ?? -1,
