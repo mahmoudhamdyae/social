@@ -29,12 +29,12 @@ class _LikeButtonState extends State<LikeButton> {
         onTap: () {
           if (isLiked) {
             BlocProvider.of<CommentsCubit>(context).dislikePost(widget.post.id!, PostType.facebook, () {
-              BlocProvider.of<FacebookCubit>(context).getPosts();
+              BlocProvider.of<FacebookCubit>(context).getPostsWithoutLoading();
             });
             isLiked = false;
           } else {
             BlocProvider.of<CommentsCubit>(context).likePost(widget.post.id!, PostType.facebook, () {
-              BlocProvider.of<FacebookCubit>(context).getPosts();
+              BlocProvider.of<FacebookCubit>(context).getPostsWithoutLoading();
             });
             isLiked = true;
           }
