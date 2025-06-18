@@ -52,7 +52,7 @@ class _InstaItemState extends State<InstaItem> {
           ),
           16.ph,
 
-          if (images.isNotEmpty)
+          // if (images.isNotEmpty && videos.isNotEmpty)
             SizedBox(
               height: 250,
               child: PageView.builder(
@@ -60,7 +60,7 @@ class _InstaItemState extends State<InstaItem> {
                 itemCount: images.length + videos.length,
                 itemBuilder: (context, index) {
                   return index >= images.length ?
-                      VideoItem(link: videos[index % images.length])
+                      VideoItem(link: videos[images.isEmpty ? index : (index % images.length)])
                       : CachedImage(
                     imageUrl: images[index],
                     fit: BoxFit.cover,
@@ -71,7 +71,7 @@ class _InstaItemState extends State<InstaItem> {
             ),
 
           // Dot Indicator
-          if (images.length > 1) Center(
+          if (images.length > 1 || videos.length > 1) Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: SmoothPageIndicator(
@@ -109,9 +109,16 @@ class _InstaItemState extends State<InstaItem> {
             ],
           ),
           ((widget.insta.text ?? '').isEmpty ? 0 : 16).ph,
-          (widget.insta.text ?? '').isEmpty ? const SizedBox() : Text(
+          (widget.insta.text ?? '').isEmpty ? const SizedBox()
+              :
+          Text(
             widget.insta.text ?? '',
             textAlign: TextAlign.start,
+            style: TextStyle(
+              color: Colors.black87,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
           )
         ],
       ),

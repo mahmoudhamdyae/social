@@ -30,8 +30,11 @@ class FacebookScreen extends StatelessWidget {
               builder: (context, state) {
                 return SizedBox(
                   height: 200,
-                  child: state is SuccessGetStoriesState
-                      ? StoryList(stories: state.stories)
+                  child: state is SuccessGetStoriesState || state is LoadingGetStoriesState
+                      ? StoryList(
+                    stories: state is SuccessGetStoriesState ? state.stories : [],
+                    isLoading: state is LoadingGetStoriesState,
+                  )
                       : const SizedBox(),
                 );
               },
