@@ -1,33 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:social/core/extensions/num_extensions.dart';
 
 class VideoDescription extends StatelessWidget {
-  final username;
-  final videtoTitle;
-  final songInfo;
+  final String userName;
+  final String videtoTitle;
+  final String songInfo;
 
-  VideoDescription(this.username, this.videtoTitle, this.songInfo);
+  const VideoDescription(
+      this.userName,
+      this.videtoTitle,
+      this.songInfo,
+      {super.key}
+      );
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: Container(
-            height: 120.0,
+            height: 120,
             padding: EdgeInsets.only(left: 20.0),
             child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+                children: [
                   Text(
-                    '@$username',
+                    userName,
                     style: TextStyle(
                         fontSize: 16,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
-                    height: 7,
-                  ),
+                  7.ph,
                   Text(
                     videtoTitle,
                     style: TextStyle(
@@ -35,9 +39,7 @@ class VideoDescription extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(
-                    height: 7,
-                  ),
+                  7.ph,
                   Row(children: [
                     Icon(
                       Icons.music_note,
@@ -45,11 +47,13 @@ class VideoDescription extends StatelessWidget {
                       color: Colors.white,
                     ),
                     Text(songInfo,
-                        style: TextStyle(color: Colors.white, fontSize: 14.0))
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.0
+                        )
+                    )
                   ]),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  10.ph,
                 ])));
   }
 }

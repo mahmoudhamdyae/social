@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social/core/components/custom_shadow.dart';
 import 'package:social/core/components/video_item.dart';
+import 'package:social/core/enums/post_type.dart';
 import 'package:social/core/extensions/num_extensions.dart';
+import 'package:social/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social/features/facebook/domain/models/post.dart';
-import 'package:social/features/facebook/presentation/components/comments_sheet.dart';
+import 'package:social/features/comments/presentation/components/comments_sheet.dart';
 import 'package:social/features/facebook/presentation/components/post_images.dart';
 import 'package:social/features/facebook/presentation/components/user_section.dart';
 import 'package:social/features/facebook/presentation/cubit/facebook_cubit.dart';
@@ -124,14 +126,17 @@ class PostItem extends StatelessWidget {
   }
 
   void _onClickComments(BuildContext context) {
-    BlocProvider.of<FacebookCubit>(context).getComments(post.id ?? -1);
+    BlocProvider.of<CommentsCubit>(context).getComments(post.id ?? -1, PostType.facebook);
     showModalBottomSheet(
         context: context,
         useRootNavigator: true,
         isScrollControlled: true,
         builder: (BuildContext builderContext) =>
-            BlocProvider.value(
-              value: BlocProvider.of<FacebookCubit>(context),
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (_) => BlocProvider.of<FacebookCubit>(context)),
+                BlocProvider(create: (_) => BlocProvider.of<CommentsCubit>(context)),
+              ],
               child: CommentsSheet(
                 postId: post.id ?? -1,
               ),

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social/core/components/screens/loading_screen.dart';
 import 'package:social/core/extensions/num_extensions.dart';
-import 'package:social/features/facebook/presentation/components/add_comment_section.dart';
-import 'package:social/features/facebook/presentation/components/comments_list.dart';
-import 'package:social/features/facebook/presentation/components/empty_comments.dart';
-import 'package:social/features/facebook/presentation/cubit/facebook_cubit.dart';
-import 'package:social/features/facebook/presentation/cubit/facebook_states.dart';
+import 'package:social/features/comments/presentation/cubit/comments_cubit.dart';
+import 'package:social/features/comments/presentation/components/empty_comments.dart';
 
 import '../../../../core/components/screens/error_screen.dart';
+import '../../../facebook/presentation/cubit/facebook_cubit.dart';
+import '../cubit/comments_state.dart';
+import 'add_comment_section.dart';
+import 'comments_list.dart';
 
 class CommentsSheet extends StatelessWidget {
 
@@ -21,12 +22,21 @@ class CommentsSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FacebookCubit, FacebookStates>(
+    return BlocConsumer<CommentsCubit, CommentsStates>(
+      listenWhen: (previous, current) =>
+      current is LoadingAddCommentState ||
+          current is ErrorAddCommentState ||
+          current is SuccessAddCommentState,
+      listener: (BuildContext context, CommentsStates state) {
+        if (state is SuccessAddCommentState) {
+          BlocProvider.of<FacebookCubit>(context).getPostsWithoutLoading();
+        }
+      },
       buildWhen: (previous, current) =>
           current is LoadingGetCommentsState ||
           current is ErrorGetCommentsState ||
           current is SuccessGetCommentsState,
-      builder: (BuildContext context, FacebookStates state) {
+      builder: (BuildContext context, CommentsStates state) {
         return state is LoadingGetCommentsState ? LoadingScreen()
         :
         state is ErrorGetCommentsState ? ErrorScreen(errorMessage: state.errorMessage ?? '')
@@ -52,7 +62,7 @@ class CommentsSheet extends StatelessWidget {
           ),
         )
         : const SizedBox();
-      }
+      },
     );
   }
 }

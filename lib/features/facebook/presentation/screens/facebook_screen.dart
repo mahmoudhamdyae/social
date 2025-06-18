@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social/core/components/screens/error_screen.dart';
 import 'package:social/core/components/screens/loading_screen.dart';
 import 'package:social/core/extensions/num_extensions.dart';
+import 'package:social/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social/features/facebook/presentation/components/posts_list.dart';
 import 'package:social/features/facebook/presentation/cubit/facebook_cubit.dart';
 import 'package:social/features/facebook/presentation/cubit/facebook_states.dart';
@@ -20,7 +21,7 @@ class FacebookScreen extends StatelessWidget {
         SliverToBoxAdapter(child: (MediaQuery.paddingOf(context).top).ph),
         SliverToBoxAdapter(
           child: BlocProvider<StoriesCubit>(
-            create: (_) => StoriesCubit.getInstance()..getStories(),
+            create: (BuildContext context) => StoriesCubit.getInstance()..getStories(),
             child: BlocBuilder<StoriesCubit, StoriesState>(
               buildWhen: (prev, curr) =>
                   curr is LoadingGetStoriesState ||
@@ -39,22 +40,25 @@ class FacebookScreen extends StatelessWidget {
         ),
         BlocProvider<FacebookCubit>(
           create: (_) => FacebookCubit.getInstance()..getPosts(),
-          child: BlocBuilder<FacebookCubit, FacebookStates>(
-            buildWhen: (prev, curr) =>
-                curr is LoadingGetPostsState ||
-                curr is ErrorGetPostsState ||
-                curr is SuccessGetPostsState,
-            builder: (context, state) {
-              return state is LoadingGetPostsState
-                  ? SliverToBoxAdapter(child: LoadingScreen())
-                  : state is ErrorGetPostsState
-                      ? SliverToBoxAdapter(
-                          child: ErrorScreen(
-                              errorMessage: state.errorMessage ?? ''))
-                      : state is SuccessGetPostsState
-                          ? PostsList(posts: state.posts)
-                          : const SliverToBoxAdapter(child: SizedBox());
-            },
+          child: BlocProvider<CommentsCubit>(
+            create: (_) => CommentsCubit.getInstance(),
+            child: BlocBuilder<FacebookCubit, FacebookStates>(
+              buildWhen: (prev, curr) =>
+                  curr is LoadingGetPostsState ||
+                  curr is ErrorGetPostsState ||
+                  curr is SuccessGetPostsState,
+              builder: (context, state) {
+                return state is LoadingGetPostsState
+                    ? SliverToBoxAdapter(child: LoadingScreen())
+                    : state is ErrorGetPostsState
+                        ? SliverToBoxAdapter(
+                            child: ErrorScreen(
+                                errorMessage: state.errorMessage ?? ''))
+                        : state is SuccessGetPostsState
+                            ? PostsList(posts: state.posts)
+                            : const SliverToBoxAdapter(child: SizedBox());
+              },
+            ),
           ),
         ),
       ],

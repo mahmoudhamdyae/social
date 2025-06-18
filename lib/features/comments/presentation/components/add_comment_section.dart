@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social/core/enums/post_type.dart';
 import 'package:social/core/extensions/num_extensions.dart';
-import 'package:social/features/facebook/presentation/cubit/facebook_cubit.dart';
+import 'package:social/features/comments/presentation/cubit/comments_cubit.dart';
 
 import '../../../../core/components/screens/loading_screen.dart';
-import '../cubit/facebook_states.dart';
+import '../cubit/comments_state.dart';
 
 class AddCommentSection extends StatefulWidget {
 
@@ -30,17 +31,17 @@ class _AddCommentSectionState extends State<AddCommentSection> {
                   decoration: InputDecoration(
                     hintText: 'Write a comment...',
                   ),
-                  controller: BlocProvider.of<FacebookCubit>(context).addCommentController,
+                  controller: BlocProvider.of<CommentsCubit>(context).addCommentController,
                 )
             )
         ),
         16.pw,
-        BlocBuilder<FacebookCubit, FacebookStates>(
+        BlocBuilder<CommentsCubit, CommentsStates>(
           buildWhen: (previous, current) =>
           current is LoadingAddCommentState ||
               current is ErrorAddCommentState ||
               current is SuccessAddCommentState,
-          builder: (BuildContext context, FacebookStates state) {
+          builder: (BuildContext context, CommentsStates state) {
             return state is LoadingAddCommentState ? LoadingScreen()
                 :
             InkWell(
@@ -69,7 +70,7 @@ class _AddCommentSectionState extends State<AddCommentSection> {
     var formData = formState.currentState;
     if (formData!.validate()) {
       formData.save();
-      BlocProvider.of<FacebookCubit>(context).addComment(widget.postId);
+      BlocProvider.of<CommentsCubit>(context).addComment(widget.postId, PostType.facebook);
     }
   }
 }

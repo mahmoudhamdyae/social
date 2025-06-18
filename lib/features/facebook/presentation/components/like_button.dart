@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social/core/enums/post_type.dart';
 import 'package:social/core/extensions/num_extensions.dart';
+import 'package:social/features/comments/presentation/cubit/comments_cubit.dart';
 
 import '../../domain/models/post.dart';
 import '../cubit/facebook_cubit.dart';
@@ -26,10 +28,14 @@ class _LikeButtonState extends State<LikeButton> {
     return InkWell(
         onTap: () {
           if (isLiked) {
-            BlocProvider.of<FacebookCubit>(context).dislikePost(widget.post.id!);
+            BlocProvider.of<CommentsCubit>(context).dislikePost(widget.post.id!, PostType.facebook, () {
+              BlocProvider.of<FacebookCubit>(context).getPosts();
+            });
             isLiked = false;
           } else {
-            BlocProvider.of<FacebookCubit>(context).likePost(widget.post.id!);
+            BlocProvider.of<CommentsCubit>(context).likePost(widget.post.id!, PostType.facebook, () {
+              BlocProvider.of<FacebookCubit>(context).getPosts();
+            });
             isLiked = true;
           }
           setState(() {});
