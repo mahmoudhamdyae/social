@@ -5,6 +5,7 @@ import 'package:social/core/enums/post_type.dart';
 import 'package:social/core/extensions/num_extensions.dart';
 import 'package:social/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social/features/comments/presentation/components/empty_comments.dart';
+import 'package:social/features/instagram/presentation/cubit/insta_cubit.dart';
 import 'package:social/features/tiktok/presentation/cubit/tiktok_cubit.dart';
 
 import '../../../../core/components/screens/error_screen.dart';
@@ -37,8 +38,7 @@ class CommentsSheet extends StatelessWidget {
             case PostType.facebook:
               BlocProvider.of<FacebookCubit>(context).getPostsWithoutLoading();
             case PostType.instagram:
-              // TODO: Handle this case.
-              throw UnimplementedError();
+              BlocProvider.of<InstaCubit>(context).getInstaWithoutLoading();
             case PostType.tiktok:
               BlocProvider.of<TiktokCubit>(context).getVideosWithoutLoading();
           }
