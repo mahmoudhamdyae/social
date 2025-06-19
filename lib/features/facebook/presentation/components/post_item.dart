@@ -72,7 +72,7 @@ class PostItem extends StatelessWidget {
                     ),
                   ),
                   8.pw,
-                  Text(
+                  post.likesNo == 0 ? const SizedBox() : Text(
                     '${post.likesNo}'
                   )
                 ],

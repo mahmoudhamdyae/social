@@ -50,7 +50,7 @@ class _InstaLikeButtonState extends State<InstaLikeButton> {
             ),
             8.pw,
             Text(
-              '${widget.likesNo}',
+              '${widget.likesNo == 0 ? '' : widget.likesNo}',
               style: TextStyle(
                 color: isLiked ? Colors.red : Colors.black87,
               ),
