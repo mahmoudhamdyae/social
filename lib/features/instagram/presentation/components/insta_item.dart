@@ -12,7 +12,6 @@ import 'package:social/features/instagram/presentation/cubit/insta_cubit.dart';
 
 import '../../../../core/enums/post_type.dart';
 import '../../../comments/presentation/components/comments_sheet.dart';
-import '../../../comments/presentation/cubit/comments_cubit.dart';
 
 class InstaItem extends StatefulWidget {
   final Insta insta;
@@ -135,11 +134,8 @@ class _InstaItemState extends State<InstaItem> {
         useRootNavigator: true,
         isScrollControlled: true,
         builder: (_) =>
-            MultiBlocProvider(
-              providers: [
-                BlocProvider.value(value: context.read<InstaCubit>()),
-                BlocProvider.value(value: context.read<CommentsCubit>()..getComments((widget.insta.id ?? -1).toString(), PostType.instagram)),
-              ],
+            BlocProvider.value(
+              value: context.read<InstaCubit>(),
               child: CommentsSheet(
                 postId: (widget.insta.id ?? -1).toString(),
                 postType: PostType.instagram,

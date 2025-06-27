@@ -4,7 +4,6 @@ import 'package:social/core/components/custom_shadow.dart';
 import 'package:social/core/components/video_item.dart';
 import 'package:social/core/enums/post_type.dart';
 import 'package:social/core/extensions/num_extensions.dart';
-import 'package:social/features/comments/presentation/cubit/comments_cubit.dart';
 import 'package:social/features/facebook/domain/models/post.dart';
 import 'package:social/features/comments/presentation/components/comments_sheet.dart';
 import 'package:social/features/facebook/presentation/components/post_images.dart';
@@ -131,11 +130,8 @@ class PostItem extends StatelessWidget {
         useRootNavigator: true,
         isScrollControlled: true,
         builder: (_) =>
-            MultiBlocProvider(
-              providers: [
-                BlocProvider.value(value: context.read<FacebookCubit>()),
-                BlocProvider.value(value: context.read<CommentsCubit>()..getComments('${post.id ?? -1}', PostType.facebook)),
-              ],
+            BlocProvider.value(
+              value: context.read<FacebookCubit>(),
               child: CommentsSheet(
                 postId: '${post.id ?? -1}',
                 postType: PostType.facebook,

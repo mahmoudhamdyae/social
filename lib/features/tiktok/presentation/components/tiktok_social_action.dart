@@ -84,11 +84,8 @@ class _TiktokSocialActionState extends State<TiktokSocialAction> {
         useRootNavigator: true,
         isScrollControlled: true,
         builder: (_) =>
-            MultiBlocProvider(
-              providers: [
-                BlocProvider.value(value: context.read<TiktokCubit>()),
-                BlocProvider.value(value: context.read<CommentsCubit>()..getComments(widget.postId, PostType.tiktok)),
-              ],
+            BlocProvider.value(
+              value: context.read<TiktokCubit>(),
               child: CommentsSheet(
                 postId: widget.postId,
                 postType: PostType.tiktok,
